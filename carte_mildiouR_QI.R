@@ -46,7 +46,14 @@ summary(db_commu)
 db_arrond<-arrond@data
 db_arrond$DEPARR<-paste(db_arrond$INSEE_DEP,db_arrond$INSEE_ARR)
 
+#back to the data folder
 setwd("~/work/Rfichiers/Githuber/mildiou_mito_comp_data")
+
+
+#select a commune using the INSES code
+commu[commu$INSEE_COM %in% c("43033","63453"),]
+#the path to access to the barycentre of the commune
+commu@polygons[1][[1]]@labpt
 
 
 ###############################################################################
@@ -57,6 +64,11 @@ rez_list<-read.table("R_mildiouQI.txt",header=TRUE,sep="\t")
 Raox_list<-rez_list[!is.na(rez_list$AOX),]
 Ramet_list<-rez_list[!is.na(rez_list$AMETOC),]
 RametBM_list<-rez_list[!is.na(rez_list$S34L),]
+
+
+###############################################################################
+#AOX maps
+###############################################################################
 
 #first we merge the resistance table with the commune info
 Raox_list<-merge(Raox_list,db_commu,by.x="INSES_CODE",by.y="INSEE_COM")
@@ -83,8 +95,6 @@ plot(departe,border="grey60",lwd=0.1)
 plot(arrond[arrond$ID %in% Raox_list$ID.y,],
      add=TRUE,col="blue",lwd=0.1)
 plot(arrond[arrond$ID %in% Raox_list$ID.y[Raox_list$AOX>9],],
-     add=TRUE,col="orange",lwd=0.1)
-plot(arrond[arrond$ID %in% Raox_list$ID.y[Raox_list$AOX>99],],
      add=TRUE,col="red",lwd=0.1)
 plot(regions,add=TRUE,lwd=1.5)
 par(op)
@@ -121,11 +131,117 @@ plot(regions,add=TRUE,lwd=1.5)
 par(op)
 
 
-commu[commu$INSEE_COM %in% c("43033","63453"),]
+###############################################################################
+#S34L maps
+###############################################################################
 
-#the path to access to the barycentre of the commune
-commu@polygons[1][1]@labpt
+#first we merge the resistance table with the commune info
+RametBM_list<-merge(RametBM_list,db_commu,by.x="INSES_CODE",by.y="INSEE_COM")
+#in order to acces to the arrondissement ID, we create an individual ID for 
+#each arrondissement combining INSEE_DEP and INSEE_ARR
+RametBM_list$DEPARR<-paste(RametBM_list$INSEE_DEP,RametBM_list$INSEE_ARR)
+#then we merge the resistance table with the arrondissement info
+RametBM_list<-merge(RametBM_list,db_arrond,by.x="DEPARR",by.y="DEPARR")
+
+#a map with only arrondissement, the different colors show the different 
+#status of the AOX type resistance for all years
+op<-par(mar=c(0,0,0,0))
+plot(departe,border="grey60",lwd=0.1)
+plot(arrond[arrond$ID %in% RametBM_list$ID.y,],
+     add=TRUE,col="blue",lwd=0.1)
+plot(arrond[arrond$ID %in% RametBM_list$ID.y[RametBM_list$S34L==1],],
+     add=TRUE,col="red",lwd=0.1)
+plot(regions,add=TRUE,lwd=1.5)
+par(op)
+
+#same map with only arrondissement, but one map for each year
+op<-par(mar=c(0,0,0,0),mfrow=c(1,3))
+#for 2015
+temp<-RametBM_list[RametBM_list$year==2015,]
+plot(departe,border="grey60",lwd=0.1,main="2015")
+plot(arrond[arrond$ID %in% temp$ID.y,],
+     add=TRUE,col="blue",lwd=0.1)
+plot(arrond[arrond$ID %in% temp$ID.y[temp$S34L==1],],
+     add=TRUE,col="red",lwd=0.1)
+plot(regions,add=TRUE,lwd=1.5)
+
+#for 2016
+temp<-RametBM_list[RametBM_list$year==2016,]
+plot(departe,border="grey60",lwd=0.1,main="2015")
+plot(arrond[arrond$ID %in% temp$ID.y,],
+     add=TRUE,col="blue",lwd=0.1)
+plot(arrond[arrond$ID %in% temp$ID.y[temp$S34L==1],],
+     add=TRUE,col="red",lwd=0.1)
+plot(regions,add=TRUE,lwd=1.5)
+
+#for 2017
+temp<-RametBM_list[RametBM_list$year==2017,]
+plot(departe,border="grey60",lwd=0.1,main="2015")
+plot(arrond[arrond$ID %in% temp$ID.y,],
+     add=TRUE,col="blue",lwd=0.1)
+plot(arrond[arrond$ID %in% temp$ID.y[temp$S34L==1],],
+     add=TRUE,col="red",lwd=0.1)
+plot(regions,add=TRUE,lwd=1.5)
+
+par(op)
+
+
+###############################################################################
+#Ametoc resistance maps
+###############################################################################
+
+#first we merge the resistance table with the commune info
+Ramet_list<-merge(Ramet_list,db_commu,by.x="INSES_CODE",by.y="INSEE_COM")
+#in order to acces to the arrondissement ID, we create an individual ID for 
+#each arrondissement combining INSEE_DEP and INSEE_ARR
+Ramet_list$DEPARR<-paste(Ramet_list$INSEE_DEP,Ramet_list$INSEE_ARR)
+#then we merge the resistance table with the arrondissement info
+Ramet_list<-merge(Ramet_list,db_arrond,by.x="DEPARR",by.y="DEPARR")
+
+#a map with only arrondissement, the different colors show the different 
+#status of the AOX type resistance for all years
+op<-par(mar=c(0,0,0,0))
+plot(departe,border="grey60",lwd=0.1)
+plot(arrond[arrond$ID %in% Ramet_list$ID.y,],
+     add=TRUE,col="blue",lwd=0.1)
+plot(arrond[arrond$ID %in% Ramet_list$ID.y[Ramet_list$AMETOC>9],],
+     add=TRUE,col="red",lwd=0.1)
+plot(regions,add=TRUE,lwd=1.5)
+par(op)
+
+#same map with only arrondissement, but one map for each year
+op<-par(mar=c(0,0,0,0),mfrow=c(1,3))
+#for 2015
+temp<-RametBM_list[RametBM_list$year==2015,]
+plot(departe,border="grey60",lwd=0.1,main="2015")
+plot(arrond[arrond$ID %in% temp$ID.y,],
+     add=TRUE,col="blue",lwd=0.1)
+plot(arrond[arrond$ID %in% temp$ID.y[temp$S34L==1],],
+     add=TRUE,col="red",lwd=0.1)
+plot(regions,add=TRUE,lwd=1.5)
+
+#for 2016
+temp<-RametBM_list[RametBM_list$year==2016,]
+plot(departe,border="grey60",lwd=0.1,main="2015")
+plot(arrond[arrond$ID %in% temp$ID.y,],
+     add=TRUE,col="blue",lwd=0.1)
+plot(arrond[arrond$ID %in% temp$ID.y[temp$S34L==1],],
+     add=TRUE,col="red",lwd=0.1)
+plot(regions,add=TRUE,lwd=1.5)
+
+#for 2017
+temp<-RametBM_list[RametBM_list$year==2017,]
+plot(departe,border="grey60",lwd=0.1,main="2015")
+plot(arrond[arrond$ID %in% temp$ID.y,],
+     add=TRUE,col="blue",lwd=0.1)
+plot(arrond[arrond$ID %in% temp$ID.y[temp$S34L==1],],
+     add=TRUE,col="red",lwd=0.1)
+plot(regions,add=TRUE,lwd=1.5)
+
+par(op)
 
 
 
-
+###############################################################################
+#THE END
+###############################################################################
