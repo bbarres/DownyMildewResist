@@ -144,7 +144,7 @@ RametBM_list$DEPARR<-paste(RametBM_list$INSEE_DEP,RametBM_list$INSEE_ARR)
 RametBM_list<-merge(RametBM_list,db_arrond,by.x="DEPARR",by.y="DEPARR")
 
 #a map with only arrondissement, the different colors show the different 
-#status of the AOX type resistance for all years
+#status of the S34L genotype for all years
 op<-par(mar=c(0,0,0,0))
 plot(departe,border="grey60",lwd=0.1)
 plot(arrond[arrond$ID %in% RametBM_list$ID.y,],
@@ -167,7 +167,7 @@ plot(regions,add=TRUE,lwd=1.5)
 
 #for 2016
 temp<-RametBM_list[RametBM_list$year==2016,]
-plot(departe,border="grey60",lwd=0.1,main="2015")
+plot(departe,border="grey60",lwd=0.1,main="2016")
 plot(arrond[arrond$ID %in% temp$ID.y,],
      add=TRUE,col="blue",lwd=0.1)
 plot(arrond[arrond$ID %in% temp$ID.y[temp$S34L==1],],
@@ -176,7 +176,7 @@ plot(regions,add=TRUE,lwd=1.5)
 
 #for 2017
 temp<-RametBM_list[RametBM_list$year==2017,]
-plot(departe,border="grey60",lwd=0.1,main="2015")
+plot(departe,border="grey60",lwd=0.1,main="2017")
 plot(arrond[arrond$ID %in% temp$ID.y,],
      add=TRUE,col="blue",lwd=0.1)
 plot(arrond[arrond$ID %in% temp$ID.y[temp$S34L==1],],
@@ -199,7 +199,7 @@ Ramet_list$DEPARR<-paste(Ramet_list$INSEE_DEP,Ramet_list$INSEE_ARR)
 Ramet_list<-merge(Ramet_list,db_arrond,by.x="DEPARR",by.y="DEPARR")
 
 #a map with only arrondissement, the different colors show the different 
-#status of the AOX type resistance for all years
+#status of the Ametoctradine target site resistance for all years
 op<-par(mar=c(0,0,0,0))
 plot(departe,border="grey60",lwd=0.1)
 plot(arrond[arrond$ID %in% Ramet_list$ID.y,],
@@ -212,34 +212,33 @@ par(op)
 #same map with only arrondissement, but one map for each year
 op<-par(mar=c(0,0,0,0),mfrow=c(1,3))
 #for 2015
-temp<-RametBM_list[RametBM_list$year==2015,]
+temp<-Ramet_list[Ramet_list$year==2015,]
 plot(departe,border="grey60",lwd=0.1,main="2015")
 plot(arrond[arrond$ID %in% temp$ID.y,],
      add=TRUE,col="blue",lwd=0.1)
-plot(arrond[arrond$ID %in% temp$ID.y[temp$S34L==1],],
+plot(arrond[arrond$ID %in% temp$ID.y[temp$AMETOC>9],],
      add=TRUE,col="red",lwd=0.1)
 plot(regions,add=TRUE,lwd=1.5)
 
 #for 2016
-temp<-RametBM_list[RametBM_list$year==2016,]
-plot(departe,border="grey60",lwd=0.1,main="2015")
+temp<-Ramet_list[Ramet_list$year==2016,]
+plot(departe,border="grey60",lwd=0.1,main="2016")
 plot(arrond[arrond$ID %in% temp$ID.y,],
      add=TRUE,col="blue",lwd=0.1)
-plot(arrond[arrond$ID %in% temp$ID.y[temp$S34L==1],],
+plot(arrond[arrond$ID %in% temp$ID.y[temp$AMETOC>9],],
      add=TRUE,col="red",lwd=0.1)
 plot(regions,add=TRUE,lwd=1.5)
 
 #for 2017
-temp<-RametBM_list[RametBM_list$year==2017,]
-plot(departe,border="grey60",lwd=0.1,main="2015")
+temp<-Ramet_list[Ramet_list$year==2017,]
+plot(departe,border="grey60",lwd=0.1,main="2017")
 plot(arrond[arrond$ID %in% temp$ID.y,],
      add=TRUE,col="blue",lwd=0.1)
-plot(arrond[arrond$ID %in% temp$ID.y[temp$S34L==1],],
+plot(arrond[arrond$ID %in% temp$ID.y[temp$AMETOC>9],],
      add=TRUE,col="red",lwd=0.1)
 plot(regions,add=TRUE,lwd=1.5)
 
 par(op)
-
 
 
 ###############################################################################
