@@ -8,6 +8,7 @@
 library(rgdal)
 library(plotrix)
 library(classInt)
+library(mapplots)
 
 #Setting the right working directory
 setwd("~/work/Rfichiers/Githuber/mildiou_mito_comp_data")
@@ -55,6 +56,9 @@ commu[commu$INSEE_COM %in% c("43033","63453"),]
 #the path to access to the barycentre of the commune
 commu@polygons[1][[1]]@labpt
 
+#coordinates of the barycentre of the departement
+departe@polygons[1][[1]]@labpt
+
 
 ###############################################################################
 #loading the resistance data
@@ -79,7 +83,7 @@ Raox_list$DEPARR<-paste(Raox_list$INSEE_DEP,Raox_list$INSEE_ARR)
 Raox_list<-merge(Raox_list,db_arrond,by.x="DEPARR",by.y="DEPARR")
 
 #one example of a map with the arrondissement and commune sampled
-op<-par(mar=c(0,0,0,0))
+op<-par(mar=c(0,0,1,0))
 plot(departe,border="grey60",lwd=0.1)
 plot(arrond[arrond$ID %in% Raox_list$ID.y,],
      add=TRUE,col="blue",lwd=0.1)
@@ -100,13 +104,41 @@ plot(regions,add=TRUE,lwd=1.5)
 par(op)
 
 #same map with only arrondissement, but one map for each year
-op<-par(mar=c(0,0,0,0),mfrow=c(1,3))
+op<-par(mar=c(0,0,1,0),mfrow=c(2,3))
+
+#for 2012
+temp<-Raox_list[Raox_list$year==2012,]
+plot(departe,border="grey60",lwd=0.1,main="2012")
+plot(arrond[arrond$ID %in% temp$ID.y,],
+     add=TRUE,col="blue",lwd=0.1)
+plot(arrond[arrond$ID %in% temp$ID.y[temp$AOX>0],],
+     add=TRUE,col="red",lwd=0.1)
+plot(regions,add=TRUE,lwd=1.5)
+
+#for 2013
+temp<-Raox_list[Raox_list$year==2013,]
+plot(departe,border="grey60",lwd=0.1,main="2013")
+plot(arrond[arrond$ID %in% temp$ID.y,],
+     add=TRUE,col="blue",lwd=0.1)
+plot(arrond[arrond$ID %in% temp$ID.y[temp$AOX>0],],
+     add=TRUE,col="red",lwd=0.1)
+plot(regions,add=TRUE,lwd=1.5)
+
+#for 2014
+temp<-Raox_list[Raox_list$year==2014,]
+plot(departe,border="grey60",lwd=0.1,main="2014")
+plot(arrond[arrond$ID %in% temp$ID.y,],
+     add=TRUE,col="blue",lwd=0.1)
+plot(arrond[arrond$ID %in% temp$ID.y[temp$AOX>0],],
+     add=TRUE,col="red",lwd=0.1)
+plot(regions,add=TRUE,lwd=1.5)
+
 #for 2015
 temp<-Raox_list[Raox_list$year==2015,]
 plot(departe,border="grey60",lwd=0.1,main="2015")
 plot(arrond[arrond$ID %in% temp$ID.y,],
      add=TRUE,col="blue",lwd=0.1)
-plot(arrond[arrond$ID %in% temp$ID.y[temp$AOX>9],],
+plot(arrond[arrond$ID %in% temp$ID.y[temp$AOX>0],],
      add=TRUE,col="red",lwd=0.1)
 plot(regions,add=TRUE,lwd=1.5)
 
@@ -115,7 +147,7 @@ temp<-Raox_list[Raox_list$year==2016,]
 plot(departe,border="grey60",lwd=0.1,main="2016")
 plot(arrond[arrond$ID %in% temp$ID.y,],
      add=TRUE,col="blue",lwd=0.1)
-plot(arrond[arrond$ID %in% temp$ID.y[temp$AOX>9],],
+plot(arrond[arrond$ID %in% temp$ID.y[temp$AOX>0],],
      add=TRUE,col="red",lwd=0.1)
 plot(regions,add=TRUE,lwd=1.5)
 
@@ -124,11 +156,168 @@ temp<-Raox_list[Raox_list$year==2017,]
 plot(departe,border="grey60",lwd=0.1,main="2017")
 plot(arrond[arrond$ID %in% temp$ID.y,],
      add=TRUE,col="blue",lwd=0.1)
-plot(arrond[arrond$ID %in% temp$ID.y[temp$AOX>9],],
+plot(arrond[arrond$ID %in% temp$ID.y[temp$AOX>0],],
      add=TRUE,col="red",lwd=0.1)
 plot(regions,add=TRUE,lwd=1.5)
 
 par(op)
+
+#export pdf 10 x 6 inches
+
+
+###############################################################################
+#AOX maps by departement
+###############################################################################
+
+op<-par(mar=c(0,0,1,0),mfrow=c(2,3))
+
+#for 2012
+temp<-Raox_list[Raox_list$year==2012,]
+#map summarizing the resistant and not resistant strains by department
+#first we list the indices of the sampled department
+ind_list<-which(departe@data$INSEE_DEP %in% 
+                  colnames(table(temp$AOX,temp$departement)))
+#building the table of barycentre coordinates of the list of department
+coorddep<-data.frame("longitude"=departe@polygons[ind_list[1]][[1]]@labpt[1],
+                     "latitude"=departe@polygons[ind_list[1]][[1]]@labpt[2])
+for (i in 2:length(ind_list)){
+  coorddep<-rbind(coorddep, 
+                  c("longitude"=departe@polygons[ind_list[i]][[1]]@labpt[1],
+                    "latitude"=departe@polygons[ind_list[i]][[1]]@labpt[2]))
+}
+coorddep<-cbind(coorddep,"nonR"=table(temp$AOX,temp$departement)[1,],
+                "Res"=table(temp$AOX,temp$departement)[2,],
+                "nb_fields"=colSums(table(temp$AOX,temp$departement)))
+plot(departe,border="grey60",lwd=0.1,main="2012")
+plot(regions,add=TRUE,lwd=1.5)
+draw.pie(x=coorddep$longitude,y=coorddep$latitude,
+         z=cbind(coorddep$nonR,coorddep$Res),
+         col=c("blue","red"),
+         radius=(sqrt(coorddep$nb_fields)*15000),labels=NA)
+
+#for 2013
+temp<-Raox_list[Raox_list$year==2013,]
+#map summarizing the resistant and not resistant strains by department
+#first we list the indices of the sampled department
+ind_list<-which(departe@data$INSEE_DEP %in% 
+                  colnames(table(temp$AOX,temp$departement)))
+#building the table of barycentre coordinates of the list of department
+coorddep<-data.frame("longitude"=departe@polygons[ind_list[1]][[1]]@labpt[1],
+                     "latitude"=departe@polygons[ind_list[1]][[1]]@labpt[2])
+for (i in 2:length(ind_list)){
+  coorddep<-rbind(coorddep, 
+                  c("longitude"=departe@polygons[ind_list[i]][[1]]@labpt[1],
+                    "latitude"=departe@polygons[ind_list[i]][[1]]@labpt[2]))
+}
+coorddep<-cbind(coorddep,"nonR"=table(temp$AOX,temp$departement)[1,],
+                "Res"=table(temp$AOX,temp$departement)[2,],
+                "nb_fields"=colSums(table(temp$AOX,temp$departement)))
+plot(departe,border="grey60",lwd=0.1,main="2013")
+plot(regions,add=TRUE,lwd=1.5)
+draw.pie(x=coorddep$longitude,y=coorddep$latitude,
+         z=cbind(coorddep$nonR,coorddep$Res),
+         col=c("blue","red"),
+         radius=(sqrt(coorddep$nb_fields)*15000),labels=NA)
+
+#for 2014
+temp<-Raox_list[Raox_list$year==2014,]
+#map summarizing the resistant and not resistant strains by department
+#first we list the indices of the sampled department
+ind_list<-which(departe@data$INSEE_DEP %in% 
+                  colnames(table(temp$AOX,temp$departement)))
+#building the table of barycentre coordinates of the list of department
+coorddep<-data.frame("longitude"=departe@polygons[ind_list[1]][[1]]@labpt[1],
+                     "latitude"=departe@polygons[ind_list[1]][[1]]@labpt[2])
+for (i in 2:length(ind_list)){
+  coorddep<-rbind(coorddep, 
+                  c("longitude"=departe@polygons[ind_list[i]][[1]]@labpt[1],
+                    "latitude"=departe@polygons[ind_list[i]][[1]]@labpt[2]))
+}
+coorddep<-cbind(coorddep,"nonR"=table(temp$AOX,temp$departement)[1,],
+                "Res"=table(temp$AOX,temp$departement)[2,],
+                "nb_fields"=colSums(table(temp$AOX,temp$departement)))
+plot(departe,border="grey60",lwd=0.1,main="2014")
+plot(regions,add=TRUE,lwd=1.5)
+draw.pie(x=coorddep$longitude,y=coorddep$latitude,
+         z=cbind(coorddep$nonR,coorddep$Res),
+         col=c("blue","red"),
+         radius=(sqrt(coorddep$nb_fields)*15000),labels=NA)
+
+#for 2015
+temp<-Raox_list[Raox_list$year==2015,]
+#map summarizing the resistant and not resistant strains by department
+#first we list the indices of the sampled department
+ind_list<-which(departe@data$INSEE_DEP %in% 
+                  colnames(table(temp$AOX,temp$departement)))
+#building the table of barycentre coordinates of the list of department
+coorddep<-data.frame("longitude"=departe@polygons[ind_list[1]][[1]]@labpt[1],
+                     "latitude"=departe@polygons[ind_list[1]][[1]]@labpt[2])
+for (i in 2:length(ind_list)){
+  coorddep<-rbind(coorddep, 
+                  c("longitude"=departe@polygons[ind_list[i]][[1]]@labpt[1],
+                    "latitude"=departe@polygons[ind_list[i]][[1]]@labpt[2]))
+}
+coorddep<-cbind(coorddep,"nonR"=table(temp$AOX,temp$departement)[1,],
+                "Res"=table(temp$AOX,temp$departement)[2,],
+                "nb_fields"=colSums(table(temp$AOX,temp$departement)))
+plot(departe,border="grey60",lwd=0.1,main="2015")
+plot(regions,add=TRUE,lwd=1.5)
+draw.pie(x=coorddep$longitude,y=coorddep$latitude,
+         z=cbind(coorddep$nonR,coorddep$Res),
+         col=c("blue","red"),
+         radius=(sqrt(coorddep$nb_fields)*15000),labels=NA)
+
+#for 2016
+temp<-Raox_list[Raox_list$year==2016,]
+#map summarizing the resistant and not resistant strains by department
+#first we list the indices of the sampled department
+ind_list<-which(departe@data$INSEE_DEP %in% 
+                  colnames(table(temp$AOX,temp$departement)))
+#building the table of barycentre coordinates of the list of department
+coorddep<-data.frame("longitude"=departe@polygons[ind_list[1]][[1]]@labpt[1],
+                     "latitude"=departe@polygons[ind_list[1]][[1]]@labpt[2])
+for (i in 2:length(ind_list)){
+  coorddep<-rbind(coorddep, 
+                  c("longitude"=departe@polygons[ind_list[i]][[1]]@labpt[1],
+                    "latitude"=departe@polygons[ind_list[i]][[1]]@labpt[2]))
+}
+coorddep<-cbind(coorddep,"nonR"=table(temp$AOX,temp$departement)[1,],
+                "Res"=table(temp$AOX,temp$departement)[2,],
+                "nb_fields"=colSums(table(temp$AOX,temp$departement)))
+plot(departe,border="grey60",lwd=0.1,main="2016")
+plot(regions,add=TRUE,lwd=1.5)
+draw.pie(x=coorddep$longitude,y=coorddep$latitude,
+         z=cbind(coorddep$nonR,coorddep$Res),
+         col=c("blue","red"),
+         radius=(sqrt(coorddep$nb_fields)*15000),labels=NA)
+
+#for 2017
+temp<-Raox_list[Raox_list$year==2017,]
+#map summarizing the resistant and not resistant strains by department
+#first we list the indices of the sampled department
+ind_list<-which(departe@data$INSEE_DEP %in% 
+                  colnames(table(temp$AOX,temp$departement)))
+#building the table of barycentre coordinates of the list of department
+coorddep<-data.frame("longitude"=departe@polygons[ind_list[1]][[1]]@labpt[1],
+                     "latitude"=departe@polygons[ind_list[1]][[1]]@labpt[2])
+for (i in 2:length(ind_list)){
+  coorddep<-rbind(coorddep, 
+                  c("longitude"=departe@polygons[ind_list[i]][[1]]@labpt[1],
+                    "latitude"=departe@polygons[ind_list[i]][[1]]@labpt[2]))
+}
+coorddep<-cbind(coorddep,"nonR"=table(temp$AOX,temp$departement)[1,],
+                "Res"=table(temp$AOX,temp$departement)[2,],
+                "nb_fields"=colSums(table(temp$AOX,temp$departement)))
+plot(departe,border="grey60",lwd=0.1,main="2017")
+plot(regions,add=TRUE,lwd=1.5)
+draw.pie(x=coorddep$longitude,y=coorddep$latitude,
+         z=cbind(coorddep$nonR,coorddep$Res),
+         col=c("blue","red"),
+         radius=(sqrt(coorddep$nb_fields)*15000),labels=NA)
+
+par(op)
+
+#export pdf 10 x 6 inches
 
 
 ###############################################################################
@@ -145,7 +334,7 @@ RametBM_list<-merge(RametBM_list,db_arrond,by.x="DEPARR",by.y="DEPARR")
 
 #a map with only arrondissement, the different colors show the different 
 #status of the S34L genotype for all years
-op<-par(mar=c(0,0,0,0))
+op<-par(mar=c(0,0,1,0))
 plot(departe,border="grey60",lwd=0.1)
 plot(arrond[arrond$ID %in% RametBM_list$ID.y,],
      add=TRUE,col="blue",lwd=0.1)
@@ -155,7 +344,7 @@ plot(regions,add=TRUE,lwd=1.5)
 par(op)
 
 #same map with only arrondissement, but one map for each year
-op<-par(mar=c(0,0,0,0),mfrow=c(1,3))
+op<-par(mar=c(0,0,1,0),mfrow=c(1,3))
 #for 2015
 temp<-RametBM_list[RametBM_list$year==2015,]
 plot(departe,border="grey60",lwd=0.1,main="2015")
@@ -182,6 +371,88 @@ plot(arrond[arrond$ID %in% temp$ID.y,],
 plot(arrond[arrond$ID %in% temp$ID.y[temp$S34L==1],],
      add=TRUE,col="red",lwd=0.1)
 plot(regions,add=TRUE,lwd=1.5)
+
+par(op)
+
+
+###############################################################################
+#S34L maps by departement
+###############################################################################
+
+#same map with only arrondissement, but one map for each year
+op<-par(mar=c(0,0,1,0),mfrow=c(1,3))
+
+#for 2015
+temp<-RametBM_list[RametBM_list$year==2015,]
+#map summarizing the resistant and not resistant strains by department
+#first we list the indices of the sampled department
+ind_list<-which(departe@data$INSEE_DEP %in% 
+                  colnames(table(temp$S34L,temp$departement)))
+#building the table of barycentre coordinates of the list of department
+coorddep<-data.frame("longitude"=departe@polygons[ind_list[1]][[1]]@labpt[1],
+                     "latitude"=departe@polygons[ind_list[1]][[1]]@labpt[2])
+for (i in 2:length(ind_list)){
+  coorddep<-rbind(coorddep, 
+                  c("longitude"=departe@polygons[ind_list[i]][[1]]@labpt[1],
+                    "latitude"=departe@polygons[ind_list[i]][[1]]@labpt[2]))
+}
+coorddep<-cbind(coorddep,"nonR"=table(temp$S34L,temp$departement)[1,],
+                "Res"=table(temp$S34L,temp$departement)[2,],
+                "nb_fields"=colSums(table(temp$S34L,temp$departement)))
+plot(departe,border="grey60",lwd=0.1,main="2015")
+plot(regions,add=TRUE,lwd=1.5)
+draw.pie(x=coorddep$longitude,y=coorddep$latitude,
+         z=cbind(coorddep$nonR,coorddep$Res),
+         col=c("blue","red"),
+         radius=(sqrt(coorddep$nb_fields)*15000),labels=NA)
+
+#for 2016
+temp<-RametBM_list[RametBM_list$year==2016,]
+#map summarizing the resistant and not resistant strains by department
+#first we list the indices of the sampled department
+ind_list<-which(departe@data$INSEE_DEP %in% 
+                  colnames(table(temp$S34L,temp$departement)))
+#building the table of barycentre coordinates of the list of department
+coorddep<-data.frame("longitude"=departe@polygons[ind_list[1]][[1]]@labpt[1],
+                     "latitude"=departe@polygons[ind_list[1]][[1]]@labpt[2])
+for (i in 2:length(ind_list)){
+  coorddep<-rbind(coorddep, 
+                  c("longitude"=departe@polygons[ind_list[i]][[1]]@labpt[1],
+                    "latitude"=departe@polygons[ind_list[i]][[1]]@labpt[2]))
+}
+coorddep<-cbind(coorddep,"nonR"=table(temp$S34L,temp$departement)[1,],
+                "Res"=table(temp$S34L,temp$departement)[2,],
+                "nb_fields"=colSums(table(temp$S34L,temp$departement)))
+plot(departe,border="grey60",lwd=0.1,main="2016")
+plot(regions,add=TRUE,lwd=1.5)
+draw.pie(x=coorddep$longitude,y=coorddep$latitude,
+         z=cbind(coorddep$nonR,coorddep$Res),
+         col=c("blue","red"),
+         radius=(sqrt(coorddep$nb_fields)*15000),labels=NA)
+
+#for 2017
+temp<-RametBM_list[RametBM_list$year==2017,]
+#map summarizing the resistant and not resistant strains by department
+#first we list the indices of the sampled department
+ind_list<-which(departe@data$INSEE_DEP %in% 
+                  colnames(table(temp$S34L,temp$departement)))
+#building the table of barycentre coordinates of the list of department
+coorddep<-data.frame("longitude"=departe@polygons[ind_list[1]][[1]]@labpt[1],
+                     "latitude"=departe@polygons[ind_list[1]][[1]]@labpt[2])
+for (i in 2:length(ind_list)){
+  coorddep<-rbind(coorddep, 
+                  c("longitude"=departe@polygons[ind_list[i]][[1]]@labpt[1],
+                    "latitude"=departe@polygons[ind_list[i]][[1]]@labpt[2]))
+}
+coorddep<-cbind(coorddep,"nonR"=table(temp$S34L,temp$departement)[1,],
+                "Res"=table(temp$S34L,temp$departement)[2,],
+                "nb_fields"=colSums(table(temp$S34L,temp$departement)))
+plot(departe,border="grey60",lwd=0.1,main="2017")
+plot(regions,add=TRUE,lwd=1.5)
+draw.pie(x=coorddep$longitude,y=coorddep$latitude,
+         z=cbind(coorddep$nonR,coorddep$Res),
+         col=c("blue","red"),
+         radius=(sqrt(coorddep$nb_fields)*15000),labels=NA)
 
 par(op)
 
