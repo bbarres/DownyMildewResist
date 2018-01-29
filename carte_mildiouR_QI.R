@@ -98,7 +98,7 @@ op<-par(mar=c(0,0,0,0))
 plot(departe,border="grey60",lwd=0.1)
 plot(arrond[arrond$ID %in% Raox_list$ID.y,],
      add=TRUE,col="blue",lwd=0.1)
-plot(arrond[arrond$ID %in% Raox_list$ID.y[Raox_list$AOX>9],],
+plot(arrond[arrond$ID %in% Raox_list$ID.y[Raox_list$AOX>0],],
      add=TRUE,col="red",lwd=0.1)
 plot(regions,add=TRUE,lwd=1.5)
 par(op)
@@ -497,7 +497,7 @@ op<-par(mar=c(0,0,0,0))
 plot(departe,border="grey60",lwd=0.1)
 plot(arrond[arrond$ID %in% Ramet_list$ID.y,],
      add=TRUE,col="blue",lwd=0.1)
-plot(arrond[arrond$ID %in% Ramet_list$ID.y[Ramet_list$AMETOC>9],],
+plot(arrond[arrond$ID %in% Ramet_list$ID.y[Ramet_list$AMETOC>0],],
      add=TRUE,col="red",lwd=0.1)
 plot(regions,add=TRUE,lwd=1.5)
 par(op)
@@ -509,7 +509,7 @@ temp<-Ramet_list[Ramet_list$year==2014,]
 plot(departe,border="grey60",lwd=0.1,main="2014")
 plot(arrond[arrond$ID %in% temp$ID.y,],
      add=TRUE,col="blue",lwd=0.1)
-plot(arrond[arrond$ID %in% temp$ID.y[temp$AMETOC>9],],
+plot(arrond[arrond$ID %in% temp$ID.y[temp$AMETOC>0],],
      add=TRUE,col="red",lwd=0.1)
 plot(regions,add=TRUE,lwd=1.5)
 
@@ -518,7 +518,7 @@ temp<-Ramet_list[Ramet_list$year==2015,]
 plot(departe,border="grey60",lwd=0.1,main="2015")
 plot(arrond[arrond$ID %in% temp$ID.y,],
      add=TRUE,col="blue",lwd=0.1)
-plot(arrond[arrond$ID %in% temp$ID.y[temp$AMETOC>9],],
+plot(arrond[arrond$ID %in% temp$ID.y[temp$AMETOC>0],],
      add=TRUE,col="red",lwd=0.1)
 plot(regions,add=TRUE,lwd=1.5)
 
@@ -527,7 +527,7 @@ temp<-Ramet_list[Ramet_list$year==2016,]
 plot(departe,border="grey60",lwd=0.1,main="2016")
 plot(arrond[arrond$ID %in% temp$ID.y,],
      add=TRUE,col="blue",lwd=0.1)
-plot(arrond[arrond$ID %in% temp$ID.y[temp$AMETOC>9],],
+plot(arrond[arrond$ID %in% temp$ID.y[temp$AMETOC>0],],
      add=TRUE,col="red",lwd=0.1)
 plot(regions,add=TRUE,lwd=1.5)
 
@@ -536,7 +536,7 @@ temp<-Ramet_list[Ramet_list$year==2017,]
 plot(departe,border="grey60",lwd=0.1,main="2017")
 plot(arrond[arrond$ID %in% temp$ID.y,],
      add=TRUE,col="blue",lwd=0.1)
-plot(arrond[arrond$ID %in% temp$ID.y[temp$AMETOC>9],],
+plot(arrond[arrond$ID %in% temp$ID.y[temp$AMETOC>0],],
      add=TRUE,col="red",lwd=0.1)
 plot(regions,add=TRUE,lwd=1.5)
 
@@ -546,6 +546,10 @@ par(op)
 ###############################################################################
 #Biological resistant to ametoc maps by departement
 ###############################################################################
+
+#in order to ease the count of different classes of resistance we turn the 
+#variable of interest into a factor
+Ramet_list$AMETOC<-as.factor(Ramet_list$AMETOC)
 
 op<-par(mar=c(0,0,1,0),mfrow=c(2,2))
 
@@ -564,15 +568,14 @@ for (i in 2:length(ind_list)){
                     "latitude"=departe@polygons[ind_list[i]][[1]]@labpt[2]))
 }
 coorddep<-cbind(coorddep,"nonR"=table(temp$AMETOC,temp$departement)[1,],
-                "Res"=if(dim(table(temp$AMETOC,temp$departement))[1]==1)
-                  rep(0,dim(table(temp$AMETOC,temp$departement))[2])
-                else table(temp$AMETOC,temp$departement)[2,],
+                "ResLost"=table(temp$AMETOC,temp$departement)[2,],
+                "Res"=table(temp$AMETOC,temp$departement)[3,],
                 "nb_fields"=colSums(table(temp$AMETOC,temp$departement)))
 plot(departe,border="grey60",lwd=0.1,main="2014")
 plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
-         z=cbind(coorddep$nonR,coorddep$Res),
-         col=c("blue","red"),
+         z=cbind(coorddep$nonR,coorddep$ResLost,coorddep$Res),
+         col=c("blue","orange","red"),
          radius=(sqrt(coorddep$nb_fields)*15000),labels=NA)
 
 #for 2015
@@ -590,19 +593,14 @@ for (i in 2:length(ind_list)){
                     "latitude"=departe@polygons[ind_list[i]][[1]]@labpt[2]))
 }
 coorddep<-cbind(coorddep,"nonR"=table(temp$AMETOC,temp$departement)[1,],
-                "Res"=if(dim(table(temp$AMETOC,temp$departement))[1]==1)
-                  rep(0,dim(table(temp$AMETOC,temp$departement))[2])
-                #be careful, what follows is a very clumsy correction to 
-                #take into account a third category of phenotype without
-                #modifying everything
-                else table(temp$AMETOC,temp$departement)[2,]/2,
-                "ResLost"= table(temp$AMETOC,temp$departement)[2,]/2,
+                "ResLost"=table(temp$AMETOC,temp$departement)[2,],
+                "Res"=table(temp$AMETOC,temp$departement)[3,],
                 "nb_fields"=colSums(table(temp$AMETOC,temp$departement)))
 plot(departe,border="grey60",lwd=0.1,main="2015")
 plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
-         z=cbind(coorddep$nonR,coorddep$Res,coorddep$ResLost),
-         col=c("blue","red","orange"),
+         z=cbind(coorddep$nonR,coorddep$ResLost,coorddep$Res),
+         col=c("blue","orange","red"),
          radius=(sqrt(coorddep$nb_fields)*15000),labels=NA)
 
 #for 2016
@@ -620,15 +618,14 @@ for (i in 2:length(ind_list)){
                     "latitude"=departe@polygons[ind_list[i]][[1]]@labpt[2]))
 }
 coorddep<-cbind(coorddep,"nonR"=table(temp$AMETOC,temp$departement)[1,],
-                "Res"=if(dim(table(temp$AMETOC,temp$departement))[1]==1)
-                  rep(0,dim(table(temp$AMETOC,temp$departement))[2])
-                else table(temp$AMETOC,temp$departement)[2,],
+                "ResLost"=table(temp$AMETOC,temp$departement)[2,],
+                "Res"=table(temp$AMETOC,temp$departement)[3,],
                 "nb_fields"=colSums(table(temp$AMETOC,temp$departement)))
 plot(departe,border="grey60",lwd=0.1,main="2016")
 plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
-         z=cbind(coorddep$nonR,coorddep$Res),
-         col=c("blue","orange"),
+         z=cbind(coorddep$nonR,coorddep$ResLost,coorddep$Res),
+         col=c("blue","orange","red"),
          radius=(sqrt(coorddep$nb_fields)*15000),labels=NA)
 
 #for 2017
@@ -646,15 +643,14 @@ for (i in 2:length(ind_list)){
                     "latitude"=departe@polygons[ind_list[i]][[1]]@labpt[2]))
 }
 coorddep<-cbind(coorddep,"nonR"=table(temp$AMETOC,temp$departement)[1,],
-                "Res"=if(dim(table(temp$AMETOC,temp$departement))[1]==1)
-                  rep(0,dim(table(temp$AMETOC,temp$departement))[2])
-                else table(temp$AMETOC,temp$departement)[2,],
+                "ResLost"=table(temp$AMETOC,temp$departement)[2,],
+                "Res"=table(temp$AMETOC,temp$departement)[3,],
                 "nb_fields"=colSums(table(temp$AMETOC,temp$departement)))
 plot(departe,border="grey60",lwd=0.1,main="2017")
 plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
-         z=cbind(coorddep$nonR,coorddep$Res),
-         col=c("blue","orange"),
+         z=cbind(coorddep$nonR,coorddep$ResLost,coorddep$Res),
+         col=c("blue","orange","red"),
          radius=(sqrt(coorddep$nb_fields)*15000),labels=NA)
 
 par(op)
@@ -683,15 +679,14 @@ for (i in 2:length(ind_list)){
                     "latitude"=departe@polygons[ind_list[i]][[1]]@labpt[2]))
 }
 coorddep<-cbind(coorddep,"nonR"=table(temp$AMETOC,temp$departement)[1,],
-                "Res"=if(dim(table(temp$AMETOC,temp$departement))[1]==1)
-                  rep(0,dim(table(temp$AMETOC,temp$departement))[2])
-                else table(temp$AMETOC,temp$departement)[2,],
+                "ResLost"=table(temp$AMETOC,temp$departement)[2,],
+                "Res"=table(temp$AMETOC,temp$departement)[3,],
                 "nb_fields"=colSums(table(temp$AMETOC,temp$departement)))
 plot(departe,border="grey60",lwd=0.1,main="2014")
 plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
-         z=cbind(coorddep$nonR,coorddep$Res),
-         col=c("blue","red"),
+         z=cbind(coorddep$nonR,coorddep$ResLost,coorddep$Res),
+         col=c("blue","orange","red"),
          radius=(sqrt(coorddep$nb_fields)*15000),labels=NA)
 
 #for 2015
@@ -709,19 +704,14 @@ for (i in 2:length(ind_list)){
                     "latitude"=departe@polygons[ind_list[i]][[1]]@labpt[2]))
 }
 coorddep<-cbind(coorddep,"nonR"=table(temp$AMETOC,temp$departement)[1,],
-                "Res"=if(dim(table(temp$AMETOC,temp$departement))[1]==1)
-                  rep(0,dim(table(temp$AMETOC,temp$departement))[2])
-                #be careful, what follows is a very clumsy correction to 
-                #take into account a third category of phenotype without
-                #modifying everything
-                else table(temp$AMETOC,temp$departement)[2,]/2,
-                "ResLost"= table(temp$AMETOC,temp$departement)[2,]/2,
+                "ResLost"=table(temp$AMETOC,temp$departement)[2,],
+                "Res"=table(temp$AMETOC,temp$departement)[3,],
                 "nb_fields"=colSums(table(temp$AMETOC,temp$departement)))
 plot(departe,border="grey60",lwd=0.1,main="2015")
 plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
-         z=cbind(coorddep$nonR,coorddep$Res,coorddep$ResLost),
-         col=c("blue","red","orange"),
+         z=cbind(coorddep$nonR,coorddep$ResLost,coorddep$Res),
+         col=c("blue","orange","red"),
          radius=(sqrt(coorddep$nb_fields)*15000),labels=NA)
 
 #for 2016
@@ -739,15 +729,14 @@ for (i in 2:length(ind_list)){
                     "latitude"=departe@polygons[ind_list[i]][[1]]@labpt[2]))
 }
 coorddep<-cbind(coorddep,"nonR"=table(temp$AMETOC,temp$departement)[1,],
-                "Res"=if(dim(table(temp$AMETOC,temp$departement))[1]==1)
-                  rep(0,dim(table(temp$AMETOC,temp$departement))[2])
-                else table(temp$AMETOC,temp$departement)[2,],
+                "ResLost"=table(temp$AMETOC,temp$departement)[2,],
+                "Res"=table(temp$AMETOC,temp$departement)[3,],
                 "nb_fields"=colSums(table(temp$AMETOC,temp$departement)))
 plot(departe,border="grey60",lwd=0.1,main="2016")
 plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
-         z=cbind(coorddep$nonR,coorddep$Res),
-         col=c("blue","orange"),
+         z=cbind(coorddep$nonR,coorddep$ResLost,coorddep$Res),
+         col=c("blue","orange","red"),
          radius=(sqrt(coorddep$nb_fields)*15000),labels=NA)
 
 #for 2017
@@ -765,20 +754,23 @@ for (i in 2:length(ind_list)){
                     "latitude"=departe@polygons[ind_list[i]][[1]]@labpt[2]))
 }
 coorddep<-cbind(coorddep,"nonR"=table(temp$AMETOC,temp$departement)[1,],
-                "Res"=if(dim(table(temp$AMETOC,temp$departement))[1]==1)
-                  rep(0,dim(table(temp$AMETOC,temp$departement))[2])
-                else table(temp$AMETOC,temp$departement)[2,],
+                "ResLost"=table(temp$AMETOC,temp$departement)[2,],
+                "Res"=table(temp$AMETOC,temp$departement)[3,],
                 "nb_fields"=colSums(table(temp$AMETOC,temp$departement)))
 plot(departe,border="grey60",lwd=0.1,main="2017")
 plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
-         z=cbind(coorddep$nonR,coorddep$Res),
-         col=c("blue","orange"),
+         z=cbind(coorddep$nonR,coorddep$ResLost,coorddep$Res),
+         col=c("blue","orange","red"),
          radius=(sqrt(coorddep$nb_fields)*15000),labels=NA)
 
+
 #for 2014 BM
-plot(departe,border="grey60",lwd=0.1,main="2014")
-plot(regions,add=TRUE,lwd=1.5)
+plot(departe,border="white",lwd=0.1,main="Legend")
+legend.pie("bottom",c(3,3,3),labels=c("Sensitive","Not confirmed","Resistant"),
+           radius=10*15000,bty="n",col=c("white","grey70","black"))
+legend.bubble("top",z=c(1,5,10,15)*15000,bty="n",mab = 5,
+              maxradius=225000)
 
 #for 2015 BM
 temp<-RametBM_list[RametBM_list$year==2015,]
