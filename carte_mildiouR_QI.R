@@ -764,12 +764,12 @@ draw.pie(x=coorddep$longitude,y=coorddep$latitude,
          col=c("blue","orange","red"),
          radius=(sqrt(coorddep$nb_fields)*15000),labels=NA)
 
-library(cartography) #to be explored
+library(cartography) #to be explored for legend
 #for 2014 BM
 plot(departe,border="white",lwd=0.1,main="Legend")
 legend.pie("bottom",c(3,3,3),labels=c("Sensitive","Not confirmed","Resistant"),
-           radius=10*15000,bty="n",col=c("white","grey70","black"))
-legend.bubble("center",z=c(1,2,10,15)*15000,bty="n",mab = 5,
+           radius=10*15000,bty="n",col=c("blue","orange","red"))
+legend.bubble("center",z=c(1,2,10,15)*15000,bty="n",mab = 1.2,
               maxradius=225000)
 
 #for 2015 BM
