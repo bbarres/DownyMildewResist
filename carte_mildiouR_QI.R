@@ -764,13 +764,17 @@ draw.pie(x=coorddep$longitude,y=coorddep$latitude,
          col=c("blue","orange","red"),
          radius=(sqrt(coorddep$nb_fields)*15000),labels=NA)
 
-library(cartography) #to be explored for legend
+
 #for 2014 BM
 plot(departe,border="white",lwd=0.1,main="Legend")
-legend.pie("bottom",c(3,3,3),labels=c("Sensitive","Not confirmed","Resistant"),
-           radius=10*15000,bty="n",col=c("blue","orange","red"))
-legend.bubble("center",z=c(1,2,10,15)*15000,bty="n",mab = 1.2,
-              maxradius=225000)
+draw.pie(x=c(490000,490000,490000,490000,490000),
+         y=c(6400000,6510000,6590000,6650000,6700000),
+         z=cbind(c(0,0,0,0,0),c(2,2,2,2,2)),
+         radius=sqrt(c(12,8,4,2,1))*15000,col="grey70",border=FALSE)
+text(x=c(550000,550000,550000,550000,550000),
+     y=c(6400000,6510000,6590000,6650000,6700000),
+     labels=c("12 fields","8 fields","4 fields","2 fields","1 field"),
+     cex=1,pos=4)
 
 #for 2015 BM
 temp<-RametBM_list[RametBM_list$year==2015,]
