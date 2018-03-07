@@ -682,12 +682,12 @@ coorddep<-cbind(coorddep,"nonR"=table(temp$AMETOC,temp$departement)[1,],
                 "ResLost"=table(temp$AMETOC,temp$departement)[2,],
                 "Res"=table(temp$AMETOC,temp$departement)[3,],
                 "nb_fields"=colSums(table(temp$AMETOC,temp$departement)))
-plot(departe,border="grey60",lwd=0.1,main="2014")
+plot(departe,border="grey50",lwd=0.2,main="2014")
 plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
          z=cbind(coorddep$nonR,coorddep$ResLost,coorddep$Res),
          col=c("blue","orange","red"),
-         radius=(sqrt(coorddep$nb_fields)*15000),labels=NA)
+         radius=(sqrt(coorddep$nb_fields)*18000),labels=NA)
 
 #for 2015
 temp<-Ramet_list[Ramet_list$year==2015,]
@@ -707,12 +707,12 @@ coorddep<-cbind(coorddep,"nonR"=table(temp$AMETOC,temp$departement)[1,],
                 "ResLost"=table(temp$AMETOC,temp$departement)[2,],
                 "Res"=table(temp$AMETOC,temp$departement)[3,],
                 "nb_fields"=colSums(table(temp$AMETOC,temp$departement)))
-plot(departe,border="grey60",lwd=0.1,main="2015")
+plot(departe,border="grey50",lwd=0.2,main="2015")
 plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
          z=cbind(coorddep$nonR,coorddep$ResLost,coorddep$Res),
          col=c("blue","orange","red"),
-         radius=(sqrt(coorddep$nb_fields)*15000),labels=NA)
+         radius=(sqrt(coorddep$nb_fields)*18000),labels=NA)
 
 #for 2016
 temp<-Ramet_list[Ramet_list$year==2016,]
@@ -732,12 +732,12 @@ coorddep<-cbind(coorddep,"nonR"=table(temp$AMETOC,temp$departement)[1,],
                 "ResLost"=table(temp$AMETOC,temp$departement)[2,],
                 "Res"=table(temp$AMETOC,temp$departement)[3,],
                 "nb_fields"=colSums(table(temp$AMETOC,temp$departement)))
-plot(departe,border="grey60",lwd=0.1,main="2016")
+plot(departe,border="grey50",lwd=0.2,main="2016")
 plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
          z=cbind(coorddep$nonR,coorddep$ResLost,coorddep$Res),
          col=c("blue","orange","red"),
-         radius=(sqrt(coorddep$nb_fields)*15000),labels=NA)
+         radius=(sqrt(coorddep$nb_fields)*18000),labels=NA)
 
 #for 2017
 temp<-Ramet_list[Ramet_list$year==2017,]
@@ -757,24 +757,25 @@ coorddep<-cbind(coorddep,"nonR"=table(temp$AMETOC,temp$departement)[1,],
                 "ResLost"=table(temp$AMETOC,temp$departement)[2,],
                 "Res"=table(temp$AMETOC,temp$departement)[3,],
                 "nb_fields"=colSums(table(temp$AMETOC,temp$departement)))
-plot(departe,border="grey60",lwd=0.1,main="2017")
+plot(departe,border="grey50",lwd=0.2,main="2017")
 plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
          z=cbind(coorddep$nonR,coorddep$ResLost,coorddep$Res),
          col=c("blue","orange","red"),
-         radius=(sqrt(coorddep$nb_fields)*15000),labels=NA)
+         radius=(sqrt(coorddep$nb_fields)*18000),labels=NA)
 
 
 #for 2014 BM
-plot(departe,border="white",lwd=0.1,main="Legend")
+plot(departe,border="white",lwd=0.1,main="")
 draw.pie(x=c(490000,490000,490000,490000,490000),
-         y=c(6400000,6510000,6590000,6650000,6700000),
+         y=c(6400000,6505000,6590000,6656500,6708000),
          z=cbind(c(0,0,0,0,0),c(2,2,2,2,2)),
-         radius=sqrt(c(12,8,4,2,1))*15000,col="grey70",border=FALSE)
-text(x=c(550000,550000,550000,550000,550000),
-     y=c(6400000,6510000,6590000,6650000,6700000),
-     labels=c("12 fields","8 fields","4 fields","2 fields","1 field"),
-     cex=1,pos=4)
+         radius=sqrt(c(9,6,4,2,1))*18000,col="grey70",border=FALSE)
+text(x=c(555000,555000,555000,555000,555000),
+     y=c(6400000,6505000,6590000,6656500,6708000),
+     labels=c("9 fields","6 fields","4 fields","2 fields","1 field"),
+     cex=1,adj=c(0,0.5))#pos=4)
+text(x=550000,y=6800000,labels="Legend",cex=1.5,font=2)
 
 #for 2015 BM
 temp<-RametBM_list[RametBM_list$year==2015,]
@@ -795,12 +796,12 @@ coorddep<-cbind(coorddep,"nonR"=table(temp$S34L,temp$departement)[1,],
                   rep(0,dim(table(temp$S34L,temp$departement))[2])
                 else table(temp$S34L,temp$departement)[2,],
                 "nb_fields"=colSums(table(temp$S34L,temp$departement)))
-plot(departe,border="grey60",lwd=0.1,main="2015")
+plot(departe,border="grey50",lwd=0.2,main="2015")
 plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
          z=cbind(coorddep$nonR,coorddep$Res),
          col=c("blue","red"),
-         radius=(sqrt(coorddep$nb_fields)*15000),labels=NA)
+         radius=(sqrt(coorddep$nb_fields)*18000),labels=NA)
 
 #for 2016 BM
 temp<-RametBM_list[RametBM_list$year==2016,]
@@ -821,12 +822,12 @@ coorddep<-cbind(coorddep,"nonR"=table(temp$S34L,temp$departement)[1,],
                   rep(0,dim(table(temp$S34L,temp$departement))[2])
                 else table(temp$S34L,temp$departement)[2,],
                 "nb_fields"=colSums(table(temp$S34L,temp$departement)))
-plot(departe,border="grey60",lwd=0.1,main="2016")
+plot(departe,border="grey50",lwd=0.2,main="2016")
 plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
          z=cbind(coorddep$nonR,coorddep$Res),
          col=c("blue","red"),
-         radius=(sqrt(coorddep$nb_fields)*15000),labels=NA)
+         radius=(sqrt(coorddep$nb_fields)*18000),labels=NA)
 
 #for 2017 BM
 temp<-RametBM_list[RametBM_list$year==2017,]
@@ -847,12 +848,12 @@ coorddep<-cbind(coorddep,"nonR"=table(temp$S34L,temp$departement)[1,],
                   rep(0,dim(table(temp$S34L,temp$departement))[2])
                 else table(temp$S34L,temp$departement)[2,],
                 "nb_fields"=colSums(table(temp$S34L,temp$departement)))
-plot(departe,border="grey60",lwd=0.1,main="2017")
+plot(departe,border="grey50",lwd=0.2,main="2017")
 plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
          z=cbind(coorddep$nonR,coorddep$Res),
          col=c("blue","red"),
-         radius=(sqrt(coorddep$nb_fields)*15000),labels=NA)
+         radius=(sqrt(coorddep$nb_fields)*18000),labels=NA)
 
 par(op)
 
