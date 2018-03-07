@@ -682,7 +682,7 @@ coorddep<-cbind(coorddep,"nonR"=table(temp$AMETOC,temp$departement)[1,],
                 "ResLost"=table(temp$AMETOC,temp$departement)[2,],
                 "Res"=table(temp$AMETOC,temp$departement)[3,],
                 "nb_fields"=colSums(table(temp$AMETOC,temp$departement)))
-plot(departe,border="grey50",lwd=0.2,main="2014")
+plot(departe,border="grey40",lwd=0.3,main="2014")
 plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
          z=cbind(coorddep$nonR,coorddep$ResLost,coorddep$Res),
@@ -707,7 +707,7 @@ coorddep<-cbind(coorddep,"nonR"=table(temp$AMETOC,temp$departement)[1,],
                 "ResLost"=table(temp$AMETOC,temp$departement)[2,],
                 "Res"=table(temp$AMETOC,temp$departement)[3,],
                 "nb_fields"=colSums(table(temp$AMETOC,temp$departement)))
-plot(departe,border="grey50",lwd=0.2,main="2015")
+plot(departe,border="grey40",lwd=0.3,main="2015")
 plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
          z=cbind(coorddep$nonR,coorddep$ResLost,coorddep$Res),
@@ -732,7 +732,7 @@ coorddep<-cbind(coorddep,"nonR"=table(temp$AMETOC,temp$departement)[1,],
                 "ResLost"=table(temp$AMETOC,temp$departement)[2,],
                 "Res"=table(temp$AMETOC,temp$departement)[3,],
                 "nb_fields"=colSums(table(temp$AMETOC,temp$departement)))
-plot(departe,border="grey50",lwd=0.2,main="2016")
+plot(departe,border="grey40",lwd=0.3,main="2016")
 plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
          z=cbind(coorddep$nonR,coorddep$ResLost,coorddep$Res),
@@ -757,7 +757,7 @@ coorddep<-cbind(coorddep,"nonR"=table(temp$AMETOC,temp$departement)[1,],
                 "ResLost"=table(temp$AMETOC,temp$departement)[2,],
                 "Res"=table(temp$AMETOC,temp$departement)[3,],
                 "nb_fields"=colSums(table(temp$AMETOC,temp$departement)))
-plot(departe,border="grey50",lwd=0.2,main="2017")
+plot(departe,border="grey40",lwd=0.3,main="2017")
 plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
          z=cbind(coorddep$nonR,coorddep$ResLost,coorddep$Res),
@@ -796,7 +796,7 @@ coorddep<-cbind(coorddep,"nonR"=table(temp$S34L,temp$departement)[1,],
                   rep(0,dim(table(temp$S34L,temp$departement))[2])
                 else table(temp$S34L,temp$departement)[2,],
                 "nb_fields"=colSums(table(temp$S34L,temp$departement)))
-plot(departe,border="grey50",lwd=0.2,main="2015")
+plot(departe,border="grey40",lwd=0.3,main="2015")
 plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
          z=cbind(coorddep$nonR,coorddep$Res),
@@ -822,7 +822,7 @@ coorddep<-cbind(coorddep,"nonR"=table(temp$S34L,temp$departement)[1,],
                   rep(0,dim(table(temp$S34L,temp$departement))[2])
                 else table(temp$S34L,temp$departement)[2,],
                 "nb_fields"=colSums(table(temp$S34L,temp$departement)))
-plot(departe,border="grey50",lwd=0.2,main="2016")
+plot(departe,border="grey40",lwd=0.3,main="2016")
 plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
          z=cbind(coorddep$nonR,coorddep$Res),
@@ -848,7 +848,7 @@ coorddep<-cbind(coorddep,"nonR"=table(temp$S34L,temp$departement)[1,],
                   rep(0,dim(table(temp$S34L,temp$departement))[2])
                 else table(temp$S34L,temp$departement)[2,],
                 "nb_fields"=colSums(table(temp$S34L,temp$departement)))
-plot(departe,border="grey50",lwd=0.2,main="2017")
+plot(departe,border="grey40",lwd=0.3,main="2017")
 plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
          z=cbind(coorddep$nonR,coorddep$Res),
