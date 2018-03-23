@@ -9,6 +9,7 @@ library(rgdal)
 library(plotrix)
 library(classInt)
 library(mapplots)
+library(visreg)
 
 #Setting the right working directory
 setwd("~/work/Rfichiers/Githuber/mildiou_mito_comp_data")
@@ -1086,6 +1087,69 @@ par(op)
 
 #export pdf 10 x 6 inches
 
+
+###############################################################################
+#Is AOX resistant strains more common by the end of the season?
+###############################################################################
+
+
+#we first create a new variable, namely the day of the year when the sampling
+#took place
+Raox_list$dayofyear<-as.POSIXlt((as.Date(Raox_list$sampling_date)))$yday
+#then we add a column for the day of the year when the first sample was 
+#collected
+Raox_list$firstsampY<-
+c(rep(min(Raox_list[Raox_list$year==2012,"dayofyear"]),
+      table(Raox_list$year)[1]),
+  rep(min(Raox_list[Raox_list$year==2013,"dayofyear"]),
+      table(Raox_list$year)[2]),
+  rep(min(Raox_list[Raox_list$year==2014,"dayofyear"]),
+      table(Raox_list$year)[3]),
+  rep(min(Raox_list[Raox_list$year==2015,"dayofyear"]),
+      table(Raox_list$year)[4]),
+  rep(min(Raox_list[Raox_list$year==2016,"dayofyear"]),
+      table(Raox_list$year)[5]),
+  rep(min(Raox_list[Raox_list$year==2017,"dayofyear"]),
+      table(Raox_list$year)[6]))
+#finaly we create a variable "number of day after first sampling of the year"
+Raox_list$dayEpid<-Raox_list$dayofyear-Raox_list$firstsampY
+
+#we plot the AOX resistance status according to the day of the year of
+#sampling
+plot(Raox_list$AOX~Raox_list$dayofyear)
+boxplot(Raox_list$dayofyear~Raox_list$AOX)
+
+#we plot the AOX resistance statut according to the number of day after 
+#the beginning of the epidemic
+plot(Raox_list$AOX~Raox_list$dayEpid)
+boxplot(Raox_list$dayEpid~Raox_list$AOX)
+
+#we perform a logistic regression in order to test if the day of the year, 
+#the year and the departement (geographical subdivisions) have an impact 
+#on the proportion of population displaying AOX resistance results to 
+#bioassay
+AOX.mod1<-glm(AOX~dayofyear+year+departement,family="binomial",
+              data=Raox_list)
+summary(AOX.mod1)
+AOX.mod1<-glm(AOX~dayofyear+year,family="binomial",
+              data=Raox_list)
+summary(AOX.mod1)
+
+#the model with the number of day after the beginning of the infection is 
+#not very informative
+AOX.mod2<-glm(AOX~dayEpid+year,family="binomial",data=Raox_list)
+summary(AOX.mod2)
+
+#some visualisation of the regression results
+visreg(AOX.mod1,"year",rug=2,scale="response",jitter=TRUE,by="AOX",
+       overlay=TRUE,partial=FALSE,xlab="Year",ylab="P(AOX resistant")
+visreg(AOX.mod1,"dayofyear",rug=2,scale="response",jitter=TRUE,by="AOX",
+       overlay=TRUE,partial=FALSE,xlab="Day of the year",
+       ylab="P(AOX resistant")
+
+barplot(table(Raox_list$AOX,Raox_list$year),beside=TRUE)
+plot(table(Raox_list$AOX,Raox_list$year)[2,]/
+       colSums(table(Raox_list$AOX,Raox_list$year)))
 
 ###############################################################################
 #Plotting pesticide sells at the departement level
