@@ -1142,14 +1142,18 @@ summary(AOX.mod2)
 
 #some visualisation of the regression results
 visreg(AOX.mod1,"year",rug=2,scale="response",jitter=TRUE,by="AOX",
-       overlay=TRUE,partial=FALSE,xlab="Year",ylab="P(AOX resistant")
+       overlay=TRUE,partial=FALSE,xlab="Year",ylab="P(AOX resistant)")
+#export in pdf 8 x 6 inches
+
 visreg(AOX.mod1,"dayofyear",rug=2,scale="response",jitter=TRUE,by="AOX",
        overlay=TRUE,partial=FALSE,xlab="Day of the year",
-       ylab="P(AOX resistant")
+       ylab="P(AOX resistant)")
+#export in pdf 8 x 6 inches
 
 barplot(table(Raox_list$AOX,Raox_list$year),beside=TRUE)
 plot(table(Raox_list$AOX,Raox_list$year)[2,]/
        colSums(table(Raox_list$AOX,Raox_list$year)))
+
 
 ###############################################################################
 #Plotting pesticide sells at the departement level
