@@ -65,7 +65,7 @@ departe@polygons[1][[1]]@labpt
 #loading the resistance data
 ###############################################################################
 
-rez_list<-read.table("R_mildiouQI.txt",header=TRUE,sep="\t")
+rez_list<-read.table("R_mildiouQI2.txt",header=TRUE,sep="\t")
 Raox_list<-rez_list[!is.na(rez_list$AOX),]
 Ramet_list<-rez_list[!is.na(rez_list$AMETOC),]
 RametBM_list<-rez_list[!is.na(rez_list$S34L),]
@@ -82,6 +82,8 @@ Raox_list<-merge(Raox_list,db_commu,by.x="INSES_CODE",by.y="INSEE_COM")
 Raox_list$DEPARR<-paste(Raox_list$INSEE_DEP,Raox_list$INSEE_ARR)
 #then we merge the resistance table with the arrondissement info
 Raox_list<-merge(Raox_list,db_arrond,by.x="DEPARR",by.y="DEPARR")
+#and we reorder the datatable by ID
+Raox_list<-Raox_list[order(Raox_list$sample_ID),]
 
 #one example of a map with the arrondissement and commune sampled
 op<-par(mar=c(0,0,1,0))
@@ -196,7 +198,7 @@ plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
          z=cbind(coorddep$nonR,coorddep$Res),
          col=c("blue","red"),
-         radius=(sqrt(coorddep$nb_fields)*15000),labels=NA)
+         radius=(sqrt(coorddep$nb_fields)*18000),labels=NA)
 
 #for 2013
 temp<-Raox_list[Raox_list$year==2013,]
@@ -222,7 +224,7 @@ plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
          z=cbind(coorddep$nonR,coorddep$Res),
          col=c("blue","red"),
-         radius=(sqrt(coorddep$nb_fields)*15000),labels=NA)
+         radius=(sqrt(coorddep$nb_fields)*18000),labels=NA)
 
 #for 2014
 temp<-Raox_list[Raox_list$year==2014,]
@@ -248,7 +250,7 @@ plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
          z=cbind(coorddep$nonR,coorddep$Res),
          col=c("blue","red"),
-         radius=(sqrt(coorddep$nb_fields)*15000),labels=NA)
+         radius=(sqrt(coorddep$nb_fields)*18000),labels=NA)
 
 #for 2015
 temp<-Raox_list[Raox_list$year==2015,]
@@ -274,7 +276,7 @@ plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
          z=cbind(coorddep$nonR,coorddep$Res),
          col=c("blue","red"),
-         radius=(sqrt(coorddep$nb_fields)*15000),labels=NA)
+         radius=(sqrt(coorddep$nb_fields)*18000),labels=NA)
 
 #for 2016
 temp<-Raox_list[Raox_list$year==2016,]
@@ -300,7 +302,7 @@ plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
          z=cbind(coorddep$nonR,coorddep$Res),
          col=c("blue","red"),
-         radius=(sqrt(coorddep$nb_fields)*15000),labels=NA)
+         radius=(sqrt(coorddep$nb_fields)*18000),labels=NA)
 
 #for 2017
 temp<-Raox_list[Raox_list$year==2017,]
@@ -326,7 +328,7 @@ plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
          z=cbind(coorddep$nonR,coorddep$Res),
          col=c("blue","red"),
-         radius=(sqrt(coorddep$nb_fields)*15000),labels=NA)
+         radius=(sqrt(coorddep$nb_fields)*18000),labels=NA)
 
 par(op)
 
@@ -1136,16 +1138,16 @@ AOX.mod1<-glm(AOX~dayofyear+year,family="binomial",
 summary(AOX.mod1)
 
 #the model with the number of day after the beginning of the infection is 
-#not very informative
+#slightly more "informative" and it makes more biological sens
 AOX.mod2<-glm(AOX~dayEpid+year,family="binomial",data=Raox_list)
 summary(AOX.mod2)
 
 #some visualisation of the regression results
-visreg(AOX.mod1,"year",rug=2,scale="response",jitter=TRUE,by="AOX",
+visreg(AOX.mod2,"year",rug=2,scale="response",jitter=TRUE,by="AOX",
        overlay=TRUE,partial=FALSE,xlab="Year",ylab="P(AOX resistant)")
 #export in pdf 8 x 6 inches
 
-visreg(AOX.mod1,"dayofyear",rug=2,scale="response",jitter=TRUE,by="AOX",
+visreg(AOX.mod2,"dayEpid",rug=2,scale="response",jitter=TRUE,by="AOX",
        overlay=TRUE,partial=FALSE,xlab="Day of the year",
        ylab="P(AOX resistant)")
 #export in pdf 8 x 6 inches
@@ -1154,6 +1156,8 @@ barplot(table(Raox_list$AOX,Raox_list$year),beside=TRUE)
 plot(table(Raox_list$AOX,Raox_list$year)[2,]/
        colSums(table(Raox_list$AOX,Raox_list$year)))
 
+plot(density(Raox_list[Raox_list$AOX==0,"dayEpid"]))
+lines(density(Raox_list[Raox_list$AOX==1,"dayEpid"]),col="red")
 
 ###############################################################################
 #Plotting pesticide sells at the departement level
