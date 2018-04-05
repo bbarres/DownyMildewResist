@@ -66,7 +66,8 @@ departe@polygons[1][[1]]@labpt
 ###############################################################################
 
 rez_list<-read.table("R_mildiouQI2.txt",header=TRUE,sep="\t")
-Raox_list<-rez_list[!is.na(rez_list$AOX),]
+Raox_list<-rez_list[!is.na(rez_list$AOX) | 
+                      (rez_list$AMISUL==1 & !is.na(rez_list$AMISUL)),]
 Ramet_list<-rez_list[!is.na(rez_list$AMETOC),]
 RametBM_list<-rez_list[!is.na(rez_list$S34L),]
 Ramis_list<-rez_list[!is.na(rez_list$AMISUL),]
@@ -197,7 +198,7 @@ plot(departe,border="grey60",lwd=0.1,main="2012")
 plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
          z=cbind(coorddep$nonR,coorddep$Res),
-         col=c("blue","red"),
+         col=c("blue","darkorchid1"),
          radius=(sqrt(coorddep$nb_fields)*18000),labels=NA)
 
 #for 2013
@@ -223,7 +224,7 @@ plot(departe,border="grey60",lwd=0.1,main="2013")
 plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
          z=cbind(coorddep$nonR,coorddep$Res),
-         col=c("blue","red"),
+         col=c("blue","darkorchid1"),
          radius=(sqrt(coorddep$nb_fields)*18000),labels=NA)
 
 #for 2014
@@ -249,7 +250,7 @@ plot(departe,border="grey60",lwd=0.1,main="2014")
 plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
          z=cbind(coorddep$nonR,coorddep$Res),
-         col=c("blue","red"),
+         col=c("blue","darkorchid1"),
          radius=(sqrt(coorddep$nb_fields)*18000),labels=NA)
 
 #for 2015
@@ -275,7 +276,7 @@ plot(departe,border="grey60",lwd=0.1,main="2015")
 plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
          z=cbind(coorddep$nonR,coorddep$Res),
-         col=c("blue","red"),
+         col=c("blue","darkorchid1"),
          radius=(sqrt(coorddep$nb_fields)*18000),labels=NA)
 
 #for 2016
@@ -296,12 +297,16 @@ coorddep<-cbind(coorddep,"nonR"=table(temp$AOX,temp$departement)[1,],
                 "Res"=if(dim(table(temp$AOX,temp$departement))[1]==1)
                   rep(0,dim(table(temp$AOX,temp$departement))[2])
                 else table(temp$AOX,temp$departement)[2,],
-                "nb_fields"=colSums(table(temp$AOX,temp$departement)))
+                #this is a unique addition because there were only
+                #specific resistant strains to amisulbrom in 2016
+                "AmiResPos"=table(temp$AMISUL,temp$departement)[2,])
+coorddep$nb_fields<-colSums(table(temp$AOX,temp$departement))+
+  table(temp$AMISUL,temp$departement)[2,]
 plot(departe,border="grey60",lwd=0.1,main="2016")
 plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
-         z=cbind(coorddep$nonR,coorddep$Res),
-         col=c("blue","red"),
+         z=cbind(coorddep$nonR,coorddep$Res,coorddep$AmiResPos),
+         col=c("blue","darkorchid1","orange"),
          radius=(sqrt(coorddep$nb_fields)*18000),labels=NA)
 
 #for 2017
@@ -327,7 +332,7 @@ plot(departe,border="grey60",lwd=0.1,main="2017")
 plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
          z=cbind(coorddep$nonR,coorddep$Res),
-         col=c("blue","red"),
+         col=c("blue","darkorchid1"),
          radius=(sqrt(coorddep$nb_fields)*18000),labels=NA)
 
 par(op)
