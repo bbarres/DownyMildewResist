@@ -1148,16 +1148,48 @@ visreg(AOX.mod2,"year",rug=2,scale="response",jitter=TRUE,by="AOX",
 #export in pdf 8 x 6 inches
 
 visreg(AOX.mod2,"dayEpid",rug=2,scale="response",jitter=TRUE,by="AOX",
-       overlay=TRUE,partial=FALSE,xlab="Day of the year",
+       overlay=TRUE,partial=FALSE,xlab="Day of the epidemic season",
        ylab="P(AOX resistant)")
 #export in pdf 8 x 6 inches
 
 barplot(table(Raox_list$AOX,Raox_list$year),beside=TRUE)
 plot(table(Raox_list$AOX,Raox_list$year)[2,]/
        colSums(table(Raox_list$AOX,Raox_list$year)))
+barplot(table(Raox_list$AOX,Raox_list$dayEpid),beside=TRUE)
 
 plot(density(Raox_list[Raox_list$AOX==0,"dayEpid"]))
 lines(density(Raox_list[Raox_list$AOX==1,"dayEpid"]),col="red")
+
+plot(density(Raox_list[Raox_list$AOX==0 & 
+                         Raox_list$year==2012,"dayEpid"]))
+lines(density(Raox_list[Raox_list$AOX==1 & 
+                          Raox_list$year==2012,"dayEpid"]),col="red")
+
+plot(density(Raox_list[Raox_list$AOX==0 & 
+                         Raox_list$year==2013,"dayEpid"]))
+lines(density(Raox_list[Raox_list$AOX==1 & 
+                          Raox_list$year==2013,"dayEpid"]),col="red")
+
+plot(density(Raox_list[Raox_list$AOX==0 & 
+                         Raox_list$year==2014,"dayEpid"]))
+lines(density(Raox_list[Raox_list$AOX==1 & 
+                          Raox_list$year==2014,"dayEpid"]),col="red")
+
+plot(density(Raox_list[Raox_list$AOX==0 & 
+                         Raox_list$year==2015,"dayEpid"]))
+lines(density(Raox_list[Raox_list$AOX==1 & 
+                          Raox_list$year==2015,"dayEpid"]),col="red")
+
+plot(density(Raox_list[Raox_list$AOX==0 & 
+                         Raox_list$year==2016,"dayEpid"]))
+lines(density(Raox_list[Raox_list$AOX==1 & 
+                          Raox_list$year==2016,"dayEpid"]),col="red")
+
+plot(density(Raox_list[Raox_list$AOX==0 & 
+                         Raox_list$year==2017,"dayEpid"]))
+lines(density(Raox_list[Raox_list$AOX==1 & 
+                          Raox_list$year==2017,"dayEpid"]),col="red")
+
 
 ###############################################################################
 #Plotting pesticide sells at the departement level
