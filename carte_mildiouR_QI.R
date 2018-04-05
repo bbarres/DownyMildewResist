@@ -1100,8 +1100,10 @@ par(op)
 ###############################################################################
 
 
-#we first create a new variable, namely the day of the year when the sampling
-#took place
+#we first remove the 2 samples that display specific resistance to amisulbrom
+#and then we create a new variable, namely the day of the year when the 
+#sampling took place
+Raox_list<-Raox_list[is.na(Raox_list$AMISUL) | Raox_list$AMISUL==0,]
 Raox_list$dayofyear<-as.POSIXlt((as.Date(Raox_list$sampling_date)))$yday
 #then we add a column for the day of the year when the first sample was 
 #collected
@@ -1147,6 +1149,7 @@ summary(AOX.mod1)
 AOX.mod2<-glm(AOX~dayEpid+year,family="binomial",data=Raox_list)
 summary(AOX.mod2)
 
+op<-par(mfrow=c(1,2))
 #some visualisation of the regression results
 visreg(AOX.mod2,"year",rug=2,scale="response",jitter=TRUE,by="AOX",
        overlay=TRUE,partial=FALSE,xlab="Year",ylab="P(AOX resistant)")
@@ -1156,6 +1159,8 @@ visreg(AOX.mod2,"dayEpid",rug=2,scale="response",jitter=TRUE,by="AOX",
        overlay=TRUE,partial=FALSE,xlab="Day of the epidemic season",
        ylab="P(AOX resistant)")
 #export in pdf 8 x 6 inches
+par(op)
+
 
 barplot(table(Raox_list$AOX,Raox_list$year),beside=TRUE)
 plot(table(Raox_list$AOX,Raox_list$year)[2,]/
