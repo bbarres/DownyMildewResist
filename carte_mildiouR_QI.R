@@ -1103,102 +1103,106 @@ par(op)
 #we first remove the 2 samples that display specific resistance to amisulbrom
 #and then we create a new variable, namely the day of the year when the 
 #sampling took place
-Raox_list<-Raox_list[is.na(Raox_list$AMISUL) | Raox_list$AMISUL==0,]
-Raox_list$dayofyear<-as.POSIXlt((as.Date(Raox_list$sampling_date)))$yday
+Raox_listU<-Raox_list[is.na(Raox_list$AMISUL) | Raox_list$AMISUL==0,]
+Raox_listU$dayofyear<-as.POSIXlt((as.Date(Raox_listU$sampling_date)))$yday
 #then we add a column for the day of the year when the first sample was 
 #collected
-Raox_list$firstsampY<-
-c(rep(min(Raox_list[Raox_list$year==2012,"dayofyear"]),
-      table(Raox_list$year)[1]),
-  rep(min(Raox_list[Raox_list$year==2013,"dayofyear"]),
-      table(Raox_list$year)[2]),
-  rep(min(Raox_list[Raox_list$year==2014,"dayofyear"]),
-      table(Raox_list$year)[3]),
-  rep(min(Raox_list[Raox_list$year==2015,"dayofyear"]),
-      table(Raox_list$year)[4]),
-  rep(min(Raox_list[Raox_list$year==2016,"dayofyear"]),
-      table(Raox_list$year)[5]),
-  rep(min(Raox_list[Raox_list$year==2017,"dayofyear"]),
-      table(Raox_list$year)[6]))
+Raox_listU$firstsampY<-
+c(rep(min(Raox_listU[Raox_listU$year==2012,"dayofyear"]),
+      table(Raox_listU$year)[1]),
+  rep(min(Raox_listU[Raox_listU$year==2013,"dayofyear"]),
+      table(Raox_listU$year)[2]),
+  rep(min(Raox_listU[Raox_listU$year==2014,"dayofyear"]),
+      table(Raox_listU$year)[3]),
+  rep(min(Raox_listU[Raox_listU$year==2015,"dayofyear"]),
+      table(Raox_listU$year)[4]),
+  rep(min(Raox_listU[Raox_listU$year==2016,"dayofyear"]),
+      table(Raox_listU$year)[5]),
+  rep(min(Raox_listU[Raox_listU$year==2017,"dayofyear"]),
+      table(Raox_listU$year)[6]))
 #finaly we create a variable "number of day after first sampling of the year"
-Raox_list$dayEpid<-Raox_list$dayofyear-Raox_list$firstsampY
+Raox_listU$dayEpid<-Raox_listU$dayofyear-Raox_listU$firstsampY
 
 #we plot the AOX resistance status according to the day of the year of
 #sampling
-plot(Raox_list$AOX~Raox_list$dayofyear)
-boxplot(Raox_list$dayofyear~Raox_list$AOX)
+plot(Raox_listU$AOX~Raox_listU$dayofyear)
+boxplot(Raox_listU$dayofyear~Raox_listU$AOX)
 
 #we plot the AOX resistance statut according to the number of day after 
 #the beginning of the epidemic
-plot(Raox_list$AOX~Raox_list$dayEpid)
-boxplot(Raox_list$dayEpid~Raox_list$AOX)
+plot(Raox_listU$AOX~Raox_listU$dayEpid)
+boxplot(Raox_listU$dayEpid~Raox_listU$AOX)
 
 #we perform a logistic regression in order to test if the day of the year, 
 #the year and the departement (geographical subdivisions) have an impact 
 #on the proportion of population displaying AOX resistance results to 
 #bioassay
 AOX.mod1<-glm(AOX~dayofyear+year+departement,family="binomial",
-              data=Raox_list)
+              data=Raox_listU)
 summary(AOX.mod1)
 AOX.mod1<-glm(AOX~dayofyear+year,family="binomial",
-              data=Raox_list)
+              data=Raox_listU)
 summary(AOX.mod1)
 
 #the model with the number of day after the beginning of the infection is 
 #slightly more "informative" and it makes more biological sens
-AOX.mod2<-glm(AOX~dayEpid+year,family="binomial",data=Raox_list)
+AOX.mod2comp<-glm(AOX~dayEpid*year,family="binomial",data=Raox_listU)
+AOX.mod2<-glm(AOX~dayEpid+year,family="binomial",data=Raox_listU)
+anova(AOX.mod2,AOX.mod2comp,test="Chisq")
 summary(AOX.mod2)
 
 op<-par(mfrow=c(1,2))
 #some visualisation of the regression results
 visreg(AOX.mod2,"year",rug=2,scale="response",jitter=TRUE,by="AOX",
-       overlay=TRUE,partial=FALSE,xlab="Year",ylab="P(AOX resistant)")
+       overlay=TRUE,partial=FALSE,xlab="Year",ylab="P(AOX resistant)",
+       legend=FALSE,ylim=c(0,0.7))
 #export in pdf 8 x 6 inches
-
 visreg(AOX.mod2,"dayEpid",rug=2,scale="response",jitter=TRUE,by="AOX",
        overlay=TRUE,partial=FALSE,xlab="Day of the epidemic season",
-       ylab="P(AOX resistant)")
+       ylab="P(AOX resistant)",legend=FALSE,ylim=c(0,0.7))
 #export in pdf 8 x 6 inches
 par(op)
+#export in pdf 12 x 6 inches
 
 
-barplot(table(Raox_list$AOX,Raox_list$year),beside=TRUE)
-plot(table(Raox_list$AOX,Raox_list$year)[2,]/
-       colSums(table(Raox_list$AOX,Raox_list$year)))
-barplot(table(Raox_list$AOX,Raox_list$dayEpid),beside=TRUE)
+barplot(table(Raox_listU$AOX,Raox_listU$year),beside=TRUE)
+plot(table(Raox_listU$AOX,Raox_listU$year)[2,]/
+       colSums(table(Raox_listU$AOX,Raox_listU$year))~
+       as.numeric(names(table(Raox_listU$AOX,Raox_listU$year)[2,])))
+barplot(table(Raox_listU$AOX,Raox_listU$dayEpid),beside=TRUE)
 
-plot(density(Raox_list[Raox_list$AOX==0,"dayEpid"]))
-lines(density(Raox_list[Raox_list$AOX==1,"dayEpid"]),col="red")
+plot(density(Raox_listU[Raox_listU$AOX==0,"dayEpid"]))
+lines(density(Raox_listU[Raox_listU$AOX==1,"dayEpid"]),col="red")
 
-plot(density(Raox_list[Raox_list$AOX==0 & 
-                         Raox_list$year==2012,"dayEpid"]))
-lines(density(Raox_list[Raox_list$AOX==1 & 
-                          Raox_list$year==2012,"dayEpid"]),col="red")
+plot(density(Raox_listU[Raox_listU$AOX==0 & 
+                          Raox_listU$year==2012,"dayEpid"]))
+lines(density(Raox_listU[Raox_listU$AOX==1 & 
+                           Raox_listU$year==2012,"dayEpid"]),col="red")
 
-plot(density(Raox_list[Raox_list$AOX==0 & 
-                         Raox_list$year==2013,"dayEpid"]))
-lines(density(Raox_list[Raox_list$AOX==1 & 
-                          Raox_list$year==2013,"dayEpid"]),col="red")
+plot(density(Raox_listU[Raox_listU$AOX==0 & 
+                          Raox_listU$year==2013,"dayEpid"]))
+lines(density(Raox_listU[Raox_listU$AOX==1 & 
+                           Raox_listU$year==2013,"dayEpid"]),col="red")
 
-plot(density(Raox_list[Raox_list$AOX==0 & 
-                         Raox_list$year==2014,"dayEpid"]))
-lines(density(Raox_list[Raox_list$AOX==1 & 
-                          Raox_list$year==2014,"dayEpid"]),col="red")
+plot(density(Raox_listU[Raox_listU$AOX==0 & 
+                          Raox_listU$year==2014,"dayEpid"]))
+lines(density(Raox_listU[Raox_listU$AOX==1 & 
+                           Raox_listU$year==2014,"dayEpid"]),col="red")
 
-plot(density(Raox_list[Raox_list$AOX==0 & 
-                         Raox_list$year==2015,"dayEpid"]))
-lines(density(Raox_list[Raox_list$AOX==1 & 
-                          Raox_list$year==2015,"dayEpid"]),col="red")
+plot(density(Raox_listU[Raox_listU$AOX==0 & 
+                          Raox_listU$year==2015,"dayEpid"]))
+lines(density(Raox_listU[Raox_listU$AOX==1 & 
+                           Raox_listU$year==2015,"dayEpid"]),col="red")
 
-plot(density(Raox_list[Raox_list$AOX==0 & 
-                         Raox_list$year==2016,"dayEpid"]))
-lines(density(Raox_list[Raox_list$AOX==1 & 
-                          Raox_list$year==2016,"dayEpid"]),col="red")
+plot(density(Raox_listU[Raox_listU$AOX==0 & 
+                          Raox_listU$year==2016,"dayEpid"]))
+lines(density(Raox_listU[Raox_listU$AOX==1 & 
+                           Raox_listU$year==2016,"dayEpid"]),col="red")
 
-plot(density(Raox_list[Raox_list$AOX==0 & 
-                         Raox_list$year==2017,"dayEpid"]))
-lines(density(Raox_list[Raox_list$AOX==1 & 
-                          Raox_list$year==2017,"dayEpid"]),col="red")
+plot(density(Raox_listU[Raox_listU$AOX==0 & 
+                          Raox_listU$year==2017,"dayEpid"]))
+lines(density(Raox_listU[Raox_listU$AOX==1 & 
+                           Raox_listU$year==2017,"dayEpid"]),col="red")
 
 
 ###############################################################################
