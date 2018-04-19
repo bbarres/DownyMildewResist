@@ -499,6 +499,10 @@ Ramet_list$DEPARR<-paste(Ramet_list$INSEE_DEP,Ramet_list$INSEE_ARR)
 #then we merge the resistance table with the arrondissement info
 Ramet_list<-merge(Ramet_list,db_arrond,by.x="DEPARR",by.y="DEPARR")
 
+#in order to ease the count of different classes of resistance we turn the 
+#variable of interest into a factor
+Ramet_list$AMETOC<-as.factor(Ramet_list$AMETOC)
+
 #a map with only arrondissement, the different colors show the different 
 #status of the Ametoctradine target site resistance for all years
 op<-par(mar=c(0,0,0,0))
@@ -690,7 +694,7 @@ coorddep<-cbind(coorddep,"nonR"=table(temp$AMETOC,temp$departement)[1,],
                 "ResLost"=table(temp$AMETOC,temp$departement)[2,],
                 "Res"=table(temp$AMETOC,temp$departement)[3,],
                 "nb_fields"=colSums(table(temp$AMETOC,temp$departement)))
-plot(departe,border="grey40",lwd=0.3,main="2014")
+plot(departe,border="grey40",lwd=1,main="2014",cex.main=1.5)
 plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
          z=cbind(coorddep$nonR,coorddep$ResLost,coorddep$Res),
@@ -715,7 +719,7 @@ coorddep<-cbind(coorddep,"nonR"=table(temp$AMETOC,temp$departement)[1,],
                 "ResLost"=table(temp$AMETOC,temp$departement)[2,],
                 "Res"=table(temp$AMETOC,temp$departement)[3,],
                 "nb_fields"=colSums(table(temp$AMETOC,temp$departement)))
-plot(departe,border="grey40",lwd=0.3,main="2015")
+plot(departe,border="grey40",lwd=1,main="2015",cex.main=1.5)
 plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
          z=cbind(coorddep$nonR,coorddep$ResLost,coorddep$Res),
@@ -740,7 +744,7 @@ coorddep<-cbind(coorddep,"nonR"=table(temp$AMETOC,temp$departement)[1,],
                 "ResLost"=table(temp$AMETOC,temp$departement)[2,],
                 "Res"=table(temp$AMETOC,temp$departement)[3,],
                 "nb_fields"=colSums(table(temp$AMETOC,temp$departement)))
-plot(departe,border="grey40",lwd=0.3,main="2016")
+plot(departe,border="grey40",lwd=1,main="2016",cex.main=1.5)
 plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
          z=cbind(coorddep$nonR,coorddep$ResLost,coorddep$Res),
@@ -765,7 +769,7 @@ coorddep<-cbind(coorddep,"nonR"=table(temp$AMETOC,temp$departement)[1,],
                 "ResLost"=table(temp$AMETOC,temp$departement)[2,],
                 "Res"=table(temp$AMETOC,temp$departement)[3,],
                 "nb_fields"=colSums(table(temp$AMETOC,temp$departement)))
-plot(departe,border="grey40",lwd=0.3,main="2017")
+plot(departe,border="grey40",lwd=1,main="2017",cex.main=1.5)
 plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
          z=cbind(coorddep$nonR,coorddep$ResLost,coorddep$Res),
@@ -780,10 +784,10 @@ draw.pie(x=c(490000,490000,490000,490000,490000),
          z=cbind(c(0,0,0,0,0),c(2,2,2,2,2)),
          radius=sqrt(c(9,6,4,2,1))*18000,col="grey70",border=FALSE)
 text(x=c(555000,555000,555000,555000,555000),
-     y=c(6400000,6505000,6590000,6656500,6708000),
+     y=c(6400000,6505000,6590000,6656500,6710000),
      labels=c("9 fields","6 fields","4 fields","2 fields","1 field"),
-     cex=1,adj=c(0,0.5))#pos=4)
-text(x=550000,y=6800000,labels="Legend",cex=1.5,font=2)
+     cex=1.5,adj=c(0,0.5))#pos=4)
+text(x=570000,y=6900000,labels="Legend",cex=2,font=2)
 
 #for 2015 BM
 temp<-RametBM_list[RametBM_list$year==2015,]
@@ -804,7 +808,7 @@ coorddep<-cbind(coorddep,"nonR"=table(temp$S34L,temp$departement)[1,],
                   rep(0,dim(table(temp$S34L,temp$departement))[2])
                 else table(temp$S34L,temp$departement)[2,],
                 "nb_fields"=colSums(table(temp$S34L,temp$departement)))
-plot(departe,border="grey40",lwd=0.3,main="2015")
+plot(departe,border="grey40",lwd=1,main="2015",cex.main=1.5)
 plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
          z=cbind(coorddep$nonR,coorddep$Res),
@@ -830,7 +834,7 @@ coorddep<-cbind(coorddep,"nonR"=table(temp$S34L,temp$departement)[1,],
                   rep(0,dim(table(temp$S34L,temp$departement))[2])
                 else table(temp$S34L,temp$departement)[2,],
                 "nb_fields"=colSums(table(temp$S34L,temp$departement)))
-plot(departe,border="grey40",lwd=0.3,main="2016")
+plot(departe,border="grey40",lwd=1,main="2016",cex.main=1.5)
 plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
          z=cbind(coorddep$nonR,coorddep$Res),
@@ -856,7 +860,7 @@ coorddep<-cbind(coorddep,"nonR"=table(temp$S34L,temp$departement)[1,],
                   rep(0,dim(table(temp$S34L,temp$departement))[2])
                 else table(temp$S34L,temp$departement)[2,],
                 "nb_fields"=colSums(table(temp$S34L,temp$departement)))
-plot(departe,border="grey40",lwd=0.3,main="2017")
+plot(departe,border="grey40",lwd=1,main="2017",cex.main=1.5)
 plot(regions,add=TRUE,lwd=1.5)
 draw.pie(x=coorddep$longitude,y=coorddep$latitude,
          z=cbind(coorddep$nonR,coorddep$Res),
