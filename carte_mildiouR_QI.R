@@ -1219,6 +1219,8 @@ summary(mod3)
 mod3<-glmer(AOX~dayEpid + year + (1|departement), family=binomial,
             data=Raox_listU)
 summary(mod3)
+mod3@beta
+
 mod3<-glmer(AOX~dayofyear + year + (1|departement), family=binomial,
             data=Raox_listU)
 summary(mod3)
