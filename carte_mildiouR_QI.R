@@ -1209,6 +1209,21 @@ lines(density(Raox_listU[Raox_listU$AOX==1 &
                            Raox_listU$year==2017,"dayEpid"]),col="red")
 
 
+
+
+library(lme4)
+Raox_listU$year<-Raox_listU$year-2011
+mod3<-glmer(AOX~dayEpid * year + (1|departement), family=binomial,
+            data=Raox_listU)
+summary(mod3)
+mod3<-glmer(AOX~dayEpid + year + (1|departement), family=binomial,
+            data=Raox_listU)
+summary(mod3)
+mod3<-glmer(AOX~dayofyear + year + (1|departement), family=binomial,
+            data=Raox_listU)
+summary(mod3)
+
+
 ###############################################################################
 #Plotting pesticide sells at the departement level
 ###############################################################################
