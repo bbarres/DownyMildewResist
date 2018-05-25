@@ -173,7 +173,12 @@ par(op)
 #AOX maps by departement
 ###############################################################################
 
-op<-par(mar=c(0,0,1,0),mfrow=c(2,3))
+op<-par(mar=c(0,0,1,0),mfrow=c(2,4))
+
+#the first panle is left empty
+#for the figure legend
+plot(departe,border="white",lwd=0.1,main="")
+
 
 #for 2012
 temp<-Raox_list[Raox_list$year==2012,]
@@ -252,6 +257,19 @@ draw.pie(x=coorddep$longitude,y=coorddep$latitude,
          z=cbind(coorddep$nonR,coorddep$Res),
          col=c("blue","darkorchid1"),
          radius=(sqrt(coorddep$nb_fields)*18000),labels=NA)
+
+#for the figure legend
+plot(departe,border="white",lwd=0.1,main="")
+draw.pie(x=c(490000,490000,490000,490000,490000),
+         y=c(6300000,6450000,6570000,6655000,6708000),
+         z=cbind(c(0,0,0,0,0),c(2,2,2,2,2)),
+         radius=sqrt(c(14,10,5,2,1))*18000,col="grey70",border=FALSE)
+text(x=c(555000,555000,555000,555000,555000),
+     y=c(6300000,6450000,6570000,6655000,6710000),
+     labels=c("14 fields","10 fields","5 fields","2 fields","1 field"),
+     cex=1.5,adj=c(0,0.5))#pos=4)
+text(x=600000,y=6900000,labels="Legend",cex=2,font=2)
+
 
 #for 2015
 temp<-Raox_list[Raox_list$year==2015,]
@@ -337,7 +355,7 @@ draw.pie(x=coorddep$longitude,y=coorddep$latitude,
 
 par(op)
 
-#export pdf 10 x 6 inches
+#export pdf 13.33 x 6 inches
 
 
 ###############################################################################
@@ -777,7 +795,7 @@ draw.pie(x=coorddep$longitude,y=coorddep$latitude,
          radius=(sqrt(coorddep$nb_fields)*18000),labels=NA)
 
 
-#for 2014 BM
+#for the figure legend
 plot(departe,border="white",lwd=0.1,main="")
 draw.pie(x=c(490000,490000,490000,490000,490000),
          y=c(6400000,6505000,6590000,6656500,6708000),
