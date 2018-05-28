@@ -261,15 +261,14 @@ draw.pie(x=coorddep$longitude,y=coorddep$latitude,
 #for the figure legend
 plot(departe,border="white",lwd=0.1,main="")
 draw.pie(x=c(490000,490000,490000,490000,490000),
-         y=c(6300000,6450000,6570000,6655000,6708000),
+         y=c(6300000,6450000,6570000,6655000,6720000),
          z=cbind(c(0,0,0,0,0),c(2,2,2,2,2)),
          radius=sqrt(c(14,10,5,2,1))*18000,col="grey70",border=FALSE)
-text(x=c(555000,555000,555000,555000,555000),
-     y=c(6300000,6450000,6570000,6655000,6710000),
-     labels=c("14 fields","10 fields","5 fields","2 fields","1 field"),
-     cex=1.5,adj=c(0,0.5))#pos=4)
-text(x=600000,y=6900000,labels="Legend",cex=2,font=2)
-
+text(x=c(820000,820000,820000,820000,820000),
+     y=c(6300000,6450000,6570000,6655000,6720000),
+     labels=c("14 fields","10 fields","5 fields","2 fields","1 field  "),
+     cex=1.5,adj=c(1,0.5),family="",font=1)#pos=4)
+text(x=630000,y=6900000,labels="Legend",cex=2,font=2)
 
 #for 2015
 temp<-Raox_list[Raox_list$year==2015,]
@@ -794,18 +793,17 @@ draw.pie(x=coorddep$longitude,y=coorddep$latitude,
          col=c("blue","orange","red"),
          radius=(sqrt(coorddep$nb_fields)*18000),labels=NA)
 
-
 #for the figure legend
 plot(departe,border="white",lwd=0.1,main="")
 draw.pie(x=c(490000,490000,490000,490000,490000),
-         y=c(6400000,6505000,6590000,6656500,6708000),
+         y=c(6300000,6430000,6530000,6620000,6690000),
          z=cbind(c(0,0,0,0,0),c(2,2,2,2,2)),
          radius=sqrt(c(9,6,4,2,1))*18000,col="grey70",border=FALSE)
-text(x=c(555000,555000,555000,555000,555000),
-     y=c(6400000,6505000,6590000,6656500,6710000),
-     labels=c("9 fields","6 fields","4 fields","2 fields","1 field"),
-     cex=1.5,adj=c(0,0.5))#pos=4)
-text(x=570000,y=6900000,labels="Legend",cex=2,font=2)
+text(x=c(810000,810000,810000,810000,810000),
+     y=c(6310000,6430000,6530000,6620000,6690000),
+     labels=c("9 fields","6 fields","4 fields","2 fields","1 field  "),
+     cex=1.5,adj=c(1,0.5))#pos=4)
+text(x=610000,y=6900000,labels="Legend",cex=2,font=2)
 
 #for 2015 BM
 temp<-RametBM_list[RametBM_list$year==2015,]
