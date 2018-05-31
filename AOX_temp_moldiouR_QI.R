@@ -104,11 +104,12 @@ barplot(table(Raox_listU$AOX,Raox_listU$dayEpid),beside=TRUE)
 
 
 ###############################################################################
-#generlized linear mixed-model
+#generalized linear mixed-model
 ###############################################################################
 
 #to take into account some of the potential geographical autocorrelation, 
-#we build a model with the "département" a french administrative division
+#we build a model with the "département" a french administrative division as 
+#a random effect in the model
 Raox_listU$year<-ordered(Raox_listU$year)
 Raox_listU$year<-Raox_listU$year-2011
 mod3<-glmer(AOX~dayEpid * year + (1|departement), family=binomial,
