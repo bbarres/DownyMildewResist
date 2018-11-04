@@ -10,9 +10,6 @@ library(plotrix)
 library(classInt)
 library(mapplots)
 
-#Setting the right working directory
-setwd("~/work/Rfichiers/Githuber/mildiou_mito_comp_data")
-
 
 ###############################################################################
 #loading the geographical data
