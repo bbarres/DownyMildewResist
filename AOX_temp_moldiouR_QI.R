@@ -8,16 +8,13 @@
 library(visreg)
 library(lme4)
 
-#Setting the right working directory
-setwd("~/work/Rfichiers/Githuber/mildiou_mito_comp_data")
-
 
 ###############################################################################
 #loading and preparing the AOX resistance data
 ###############################################################################
 
 #we load the raw data
-rez_list<-read.table("R_mildiouQI2.txt",header=TRUE,sep="\t")
+rez_list<-read.table("data/R_mildiouQI2.txt",header=TRUE,sep="\t")
 #we subset the data to keep only samples with information regarding
 #the AOX resistance
 Raox_list<-rez_list[!is.na(rez_list$AOX) | 
