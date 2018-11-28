@@ -36,9 +36,19 @@ departe<-readOGR(dsn="C:/Users/benoi/OneDrive/Rfichiers/Githuber-28102018/geo_da
 regions<-readOGR(dsn="C:/Users/benoi/OneDrive/Rfichiers/Githuber-28102018/geo_data/ADE_1-1_SHP_LAMB93_FR",
                  layer="REGION")
 
+commuLight<-gSimplify(commu,2000,topologyPreserve=TRUE)
+save(commuLight,file="data/commuLight.RData")
+load("data/commuLight.RData")
+plot(commuLight)
+
 deparLight<-gSimplify(departe,2000,topologyPreserve=TRUE)
+save(deparLight,file="data/deparLight.RData")
+load("data/deparLight.RData")
 plot(deparLight,lwd=3)
+
 regioLight<-gSimplify(regions,2000,topologyPreserve=TRUE)
+save(regioLight,file="data/regioLight.RData")
+load("data/regioLight.RData")
 plot(regioLight,lwd=3)
 
 #isolate the information in the spatial data on the communes
