@@ -78,6 +78,7 @@ box(lwd=3)
 axis(side=1,lwd.ticks=2,cex.axis=1.5)
 axis(side=2,lwd.ticks=2,cex.axis=1.5,las=1)
 par(op)
+
 #export in pdf 12 x 6 inches
 
 
