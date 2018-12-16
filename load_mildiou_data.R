@@ -16,10 +16,14 @@ library(rgeos)
 #loading the geographical data
 ###############################################################################
 
-#the geographical layer used here were downloaded on the IGN website (Geofla), 
-#which is the French Institut of Geographic and forest information
+#the geographical layer used here were downloaded on the IGN (the French 
+#Institut of Geographic and forest information) website: 
+#http://professionnels.ign.fr/adminexpress and then turned into a .RData file
+#The version of the dataset used here is the "Edition Novembre 2017"
+#These data are under an open licence: 
+#https://www.etalab.gouv.fr/wp-content/uploads/2014/05/Licence_Ouverte.pdf
 
-#the smallest administrative unit in France: communes
+#loading the different administrative unit levels in France
 load("data/commu.RData")
 load("data/departe.RData")
 load("data/regions.Rdata")
