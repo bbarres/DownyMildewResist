@@ -7,16 +7,22 @@
 
 ## The data
 You can find the dataset and the geographical data used to produce the analyses and the figures of this manuscript in the *data* folder. Three files contain geographical data: 
-
 + commu.RData
-![alt.text](https://xqowha.db.files.1drv.com/y4mrSE2QIRtvj8BAk6zej2_8WTCjO1WxNNqvJJn189PQZtrYHC-jBiwaqwbCY5rTQunn8hvVMFWArvEz_8XPwfpqcqn9y08ohuijpqmVQfsBmPd_5mKWMw6hiuynOoJF4Gh3V5NsyuwQ8QOyAkjNRZgy9wNdSAeFfPyrXPhJIRLP1L5f-jSsrovM02sbUEs7wXjdmbpXBuTEAVryX-JeXUBjg?width=256&height=255&cropmode=none)
-
 + departe.RData
 + regions.RData
 
-These geographical data were obtained using the data from the [IGN website](http://professionnels.ign.fr/adminexpress). The version of the data used is the "Edition Novembre 2017"
+|  commu.RData  |  departe.RData  |  regions.RData  |
+| --------------- |  --------------- |   --------------- |
+|  ![alt text](https://xqowha.db.files.1drv.com/y4mrSE2QIRtvj8BAk6zej2_8WTCjO1WxNNqvJJn189PQZtrYHC-jBiwaqwbCY5rTQunn8hvVMFWArvEz_8XPwfpqcqn9y08ohuijpqmVQfsBmPd_5mKWMw6hiuynOoJF4Gh3V5NsyuwQ8QOyAkjNRZgy9wNdSAeFfPyrXPhJIRLP1L5f-jSsrovM02sbUEs7wXjdmbpXBuTEAVryX-JeXUBjg?width=256&height=255&cropmode=none)  |  ![alt text](https://xqovha.db.files.1drv.com/y4mJeGFQBu2P37nly83ADc3vqKAMHynSiSIw5B9N0Gyuz4Uv5CWWm8dTYGOBRiRRtYrZaqpzVj-m7tjXDr9FoXnSte7Magct34bm_lID3VC3JZMXmumYeheFN15YjlDRQPmrUFX8DklJ4MAx5YCThctP2A-3WC-gHxZLV2uy5LmfFn9ZrUzztvcZt1BF6iaGf54hzV6_Ztlup5D9_6ifNC10Q?width=256&height=254&cropmode=none) | ![alt text](https://xgouha.db.files.1drv.com/y4mYTK7YsDgwIlYw6rz3j08Wd43zp1ZsXssjSbMkGL-3L4YW7ysn8MqmxecalhwJwvNu_jSRveyFkUTiUXs0FBa5SqpCfF7Gb-AP9jEfn4g3oTqBTQ90UXTe6sqXagD8p0V6m6L0RIW5eRrjxA6wQIbSQ_7dWRAtGCQlKkmLbjjFpH4p2Iw82Vfh_0ydNxFtiJhtt9v3KC-_wq7RLTWSlBi-w?width=256&height=253&cropmode=none) |
+
+
+
+
+These geographical data were obtained using the data from the [IGN website](http://professionnels.ign.fr/adminexpress). The version of the data used is the "Edition Novembre 2017". 
+
 The fourth dataset contains the code for the analysis of the frequency of the AOX-related resistance in France: 
 + R_mildiouQI2.txt
+  + *pop_ID*:
 
 ## The R scripts
 + **load_mildew_data.R:** the script to load the different datasets in the environment
