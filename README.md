@@ -17,9 +17,9 @@ The fourth dataset contains the code for the analysis of the frequency of the AO
 
 
 ## The R scripts
-+ **load_mildew_data.R:**
-+ **map_ameto.R:**
-+ **map_amisul.R:**
-+ **map_AOX.R:**
-+ **AOX_evolution.R:**
++ **load_mildew_data.R:** the script to load the different datasets in the environment
++ **map_ameto.R:** the script to produce the maps of the ametoctradin resistant populations in France
++ **map_amisul.R:** the script to produce the maps of the ametoctradin resistant populations in France
++ **map_AOX.R:** the script to produce the maps of theAOX-related resistant populations in France
++ **AOX_evolution.R:** the script to analyse the evolution of the frequency of the AOX-related resistance in France and to produce the Figure
 
