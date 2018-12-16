@@ -16,13 +16,24 @@ You can find the dataset and the geographical data used to produce the analyses 
 |  ![alt text](https://xqowha.db.files.1drv.com/y4mrSE2QIRtvj8BAk6zej2_8WTCjO1WxNNqvJJn189PQZtrYHC-jBiwaqwbCY5rTQunn8hvVMFWArvEz_8XPwfpqcqn9y08ohuijpqmVQfsBmPd_5mKWMw6hiuynOoJF4Gh3V5NsyuwQ8QOyAkjNRZgy9wNdSAeFfPyrXPhJIRLP1L5f-jSsrovM02sbUEs7wXjdmbpXBuTEAVryX-JeXUBjg?width=256&height=255&cropmode=none)  |  ![alt text](https://xqovha.db.files.1drv.com/y4mJeGFQBu2P37nly83ADc3vqKAMHynSiSIw5B9N0Gyuz4Uv5CWWm8dTYGOBRiRRtYrZaqpzVj-m7tjXDr9FoXnSte7Magct34bm_lID3VC3JZMXmumYeheFN15YjlDRQPmrUFX8DklJ4MAx5YCThctP2A-3WC-gHxZLV2uy5LmfFn9ZrUzztvcZt1BF6iaGf54hzV6_Ztlup5D9_6ifNC10Q?width=256&height=254&cropmode=none) | ![alt text](https://xgouha.db.files.1drv.com/y4mYTK7YsDgwIlYw6rz3j08Wd43zp1ZsXssjSbMkGL-3L4YW7ysn8MqmxecalhwJwvNu_jSRveyFkUTiUXs0FBa5SqpCfF7Gb-AP9jEfn4g3oTqBTQ90UXTe6sqXagD8p0V6m6L0RIW5eRrjxA6wQIbSQ_7dWRAtGCQlKkmLbjjFpH4p2Iw82Vfh_0ydNxFtiJhtt9v3KC-_wq7RLTWSlBi-w?width=256&height=253&cropmode=none) |
 
 
-
-
 These geographical data were obtained using the data from the [IGN website](http://professionnels.ign.fr/adminexpress). The version of the data used is the "Edition Novembre 2017". 
 
 The fourth dataset contains the code for the analysis of the frequency of the AOX-related resistance in France: 
 + R_mildiouQI2.txt
-  + *pop_ID*:
+  + *sample_ID*: sample identifier
+  + *year*: year of sampling
+  + *INSES_CODE*: administrative code of the commune where the sample was taken from
+  + *sampling_date*: sampling date
+  + *departement*: departement code to which the sampled commune belong
+  + *AMISULBROM_SSSHAM*: result of the discriminant dose bioassay with amisulbrom whithout SHAM (NA=not tested, 0=sensitive, 1=resistant)
+  + *AMISULBROM_SHAM*: result of the discriminant dose bioassay with amisulbrom with SHAM (NA=not tested, 0=sensitive, 1=resistant)
+  + *AMETOC_SSSHAM*: result of the discriminant dose bioassay with ametoctradin whithout SHAM (NA=not tested, 0=sensitive, 1=resistant)
+  + *AMETOC_SHAM*: result of the discriminant dose bioassay with ametoctradin and SHAM (NA=not tested, 0=sensitive, 1=resistant)
+  + *S34L*: result of the biomecular test that detect the mutation responsible for the S34L substitution (NA=not tested, 0=no resistant allele, 1=resistant allele)
+  + *AOX*: 
+  + *AMETOC*:
+  + *AMISUL*:
+  											
 
 ## The R scripts
 + **load_mildew_data.R:** the script to load the different datasets in the environment
