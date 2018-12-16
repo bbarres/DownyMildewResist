@@ -64,7 +64,7 @@ AOX.mod@beta
 op<-par(mfrow=c(1,2),oma=c(0,1,0,0),mar=c(5,5,1,1))
 #some visualisation of the regression results
 visreg(AOX.mod,"year",rug=2,scale="response",jitter=TRUE,by="AOX",
-       overlay=TRUE,partial=FALSE,xlab="Year",ylab="P(AOX resistance)",
+       overlay=TRUE,partial=FALSE,xlab="Year",ylab="P(AOX-related resistance)",
        legend=FALSE,ylim=c(0,0.7),cex.lab=1.5,bty="n",axes=FALSE)
 box(lwd=3)
 axis(side=1,lwd.ticks=2,labels=c("2012","2013","2014","2015","2016","2017"),
@@ -72,7 +72,7 @@ axis(side=1,lwd.ticks=2,labels=c("2012","2013","2014","2015","2016","2017"),
 axis(side=2,lwd.ticks=2,cex.axis=1.5,las=1)
 visreg(AOX.mod,"dayEpid",rug=2,scale="response",jitter=TRUE,by="AOX",
        overlay=TRUE,partial=FALSE,xlab="Day of the epidemic season",
-       ylab="P(AOX resistance)",legend=FALSE,ylim=c(0,0.7),cex.lab=1.5,
+       ylab="P(AOX-related resistance)",legend=FALSE,ylim=c(0,0.7),cex.lab=1.5,
        bty="n",axes=FALSE)
 box(lwd=3)
 axis(side=1,lwd.ticks=2,cex.axis=1.5)
