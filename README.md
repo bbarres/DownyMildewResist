@@ -5,16 +5,14 @@
 
 
 ## The data
-You can find the dataset and the geographical data used to produce the analyses and the figures of this manuscript in the *data* folder. Three files contain the geographical data: 
+You can find the dataset and the geographical data used to produce the analyses and the figures of this manuscript in the *data* folder. Three files contain geographical data: 
 + commu.RData
 + departe.RData
 + regions.RData
 
+These geographical data were obtained using the data from the [IGN website](http://professionnels.ign.fr/adminexpress). The version of the data used is the "Edition Novembre 2017"
 The fourth dataset contains the code for the analysis of the frequency of the AOX-related resistance in France: 
 + R_mildiouQI2.txt
-
-## 
-
 
 ## The R scripts
 + **load_mildew_data.R:** the script to load the different datasets in the environment
