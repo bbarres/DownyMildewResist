@@ -1,2 +1,2 @@
 # mildiou_mito_comp
-R code used in the data analyse and production of figure of the article 
+This repository contains the R code used for the article entitled "blablabalbalbal".  
