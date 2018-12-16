@@ -6,11 +6,11 @@
 
 ## The data
 You can find the dataset and the geographical data used to produce the analyses and the figures of this manuscript in the *data* folder. Three files contain the geographical data: 
--commu.RData
--departe.RData
--regions.RData
++ commu.RData
++ departe.RData
++ regions.RData
 The fourth dataset contains the code for the analysis of the frequency of the AOX-related resistance in France: 
--R_mildiouQI2.txt
++ R_mildiouQI2.txt
 
 ## 
 
