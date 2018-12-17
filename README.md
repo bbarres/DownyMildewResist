@@ -27,12 +27,12 @@ The fourth dataset contains the code for the analysis of the frequency of the AO
   + *departement*: departement code to which the sampled commune belong
   + *AMISULBROM_SSSHAM*: result of the discriminant dose bioassay with amisulbrom whithout SHAM (NA=not tested, 0=sensitive, 1=resistant)
   + *AMISULBROM_SHAM*: result of the discriminant dose bioassay with amisulbrom with SHAM (NA=not tested, 0=sensitive, 1=resistant)
-  + *AMETOC_SSSHAM*: result of the discriminant dose bioassay with ametoctradin whithout SHAM (NA=not tested, 0=sensitive, 1=resistant)
+  + *AMETOC_SSSHAM*: result of the discriminant dose bioassay with ametoctradin whithout SHAM (NA=not tested, 0=sensitive, 1=resistant only for the first bioassay, 2=resistant for the two bioassays)
   + *AMETOC_SHAM*: result of the discriminant dose bioassay with ametoctradin and SHAM (NA=not tested, 0=sensitive, 1=resistant)
   + *S34L*: result of the biomecular test that detect the mutation responsible for the S34L substitution (NA=not tested, 0=no resistant allele, 1=resistant allele)
-  + *AOX*: 
-  + *AMETOC*:
-  + *AMISUL*:
+  + *AOX*: AOX-related resistance status deducted from the comparison of the columns AMISULBROM_SSSHAM and AMISULBROM_SHAM (NA=not tested, 0=not AOX-related resistant, 1=AOX-related resistant)
+  + *AMETOC*: Ametoctradin resistance status deducted from a combination of the information of the columns AMETOC_SSSHAM and AMETOC_SHAM (NA=not tested, 0=sensitive, 1=target site resistant only for the first bioassay, 2=target site resistant for the two bioassays)
+  + *AMISUL*: Amisulbrom resistance status deducted from a combination of the information of the columns AMISULBROM_SSSHAM and AMISULBROM_SHAM (NA=not tested, 0=sensitive, 1=target site resistant)
   											
 
 ## The R scripts
