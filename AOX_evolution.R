@@ -4,6 +4,8 @@
 ###############################################################################
 ###############################################################################
 
+#this script is used for the regression analysis of the frequency of the 
+#populations containing AOX-related resistant strains and to produce Figure 1
 #loading the packages necessary for the analysis
 library(visreg)
 library(lme4)
