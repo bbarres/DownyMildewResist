@@ -2,6 +2,8 @@
 # Investigation on the sensitivity of *Plasmopara viticola* to amisulbrom and ametoctradin in French vineyards using bioassays and molecular tools
 *This repository contains the R code used for the data analyses and production of the figures of the related article*  
 
+![alt text](https://xwozha.db.files.1drv.com/y4mSuQULu970Jf5GnBDqavtyLhJmOPeVlKoA_UQoxH6HL-ywl0eMmxNb7C3_xA9cEiBSke1YD65qrKmw0lqQER1sfw3CdlPEwtYegKz9xDQpTbt5K0SUGSJDxYywFIMK1ZNS2pNNdMvWuL1wRJGXmgXnvZBXFA6sV-gf_wEfAJoe7BMVkBN6sF_j5Bmwur9NUocTggzp9k25bAgKSzvra9srA?width=1584&height=588&cropmode=none)
+
 ## Context
 
 
