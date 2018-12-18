@@ -5,7 +5,7 @@
 ![alt text](https://xwozha.db.files.1drv.com/y4mSuQULu970Jf5GnBDqavtyLhJmOPeVlKoA_UQoxH6HL-ywl0eMmxNb7C3_xA9cEiBSke1YD65qrKmw0lqQER1sfw3CdlPEwtYegKz9xDQpTbt5K0SUGSJDxYywFIMK1ZNS2pNNdMvWuL1wRJGXmgXnvZBXFA6sV-gf_wEfAJoe7BMVkBN6sF_j5Bmwur9NUocTggzp9k25bAgKSzvra9srA?width=1584&height=588&cropmode=none)
 
 ## Context
-
+Complex III inhibitors are fungicides that are extensively used in french vineyards. 
 
 ## The data
 You can find the dataset and the geographical data used to produce the analyses and the figures of this manuscript in the *data* folder. Three files contain geographical data: 
@@ -29,18 +29,17 @@ The fourth dataset contains the code for the analysis of the frequency of the AO
   + *departement*: departement code to which the sampled commune belong
   + *AMISULBROM_SSSHAM*: result of the discriminant dose bioassay with amisulbrom whithout SHAM (NA=not tested, 0=sensitive, 1=resistant)
   + *AMISULBROM_SHAM*: result of the discriminant dose bioassay with amisulbrom with SHAM (NA=not tested, 0=sensitive, 1=resistant)
-  + *AMETOC_SSSHAM*: result of the discriminant dose bioassay with ametoctradin whithout SHAM (NA=not tested, 0=sensitive, 1=resistant only for the first bioassay, 2=resistant for the two bioassays)
-  + *AMETOC_SHAM*: result of the discriminant dose bioassay with ametoctradin and SHAM (NA=not tested, 0=sensitive, 1=resistant)
   + *S34L*: result of the biomecular test that detect the mutation responsible for the S34L substitution (NA=not tested, 0=no resistant allele, 1=resistant allele)
   + *AOX*: AOX-related resistance status deducted from the comparison of the columns AMISULBROM_SSSHAM and AMISULBROM_SHAM (NA=not tested, 0=not AOX-related resistant, 1=AOX-related resistant)
-  + *AMETOC*: Ametoctradin resistance status deducted from a combination of the information of the columns AMETOC_SSSHAM and AMETOC_SHAM (NA=not tested, 0=sensitive, 1=target site resistant only for the first bioassay, 2=target site resistant for the two bioassays)
+  + *AMETOC*: Ametoctradin resistance status resulting from the discriminant dose bioassay with ametoctradin with SHAM (NA=not tested, 0=sensitive, 1=target site resistant only for the first bioassay, 2=target site resistant for the two bioassays)
   + *AMISUL*: Amisulbrom resistance status deducted from a combination of the information of the columns AMISULBROM_SSSHAM and AMISULBROM_SHAM (NA=not tested, 0=sensitive, 1=target site resistant)
   											
 
 ## The R scripts
 + **load_mildew_data.R:** the script to load the different datasets in the environment
-+ **map_ameto.R:** the script to produce the maps of the ametoctradin resistant populations in France
-+ **map_amisul.R:** the script to produce the maps of the ametoctradin resistant populations in France
-+ **map_AOX.R:** the script to produce the maps of theAOX-related resistant populations in France
-+ **AOX_evolution.R:** the script to analyse the evolution of the frequency of the AOX-related resistance in France and to produce the Figure
++ **AOX_evolution.R:** the script to analyse the evolution of the frequency of the population containing AOX-related resistance strains in France and to produce the Figure 1
++ **map_AOX.R:** this script produce the maps of the populations containing AOX-related resistant strains in France. This is the Figure 2
++ **map_ameto.R:** the script to produce the maps of populations containing  ametoctradin resistant strains in France using either bioassay or biomolecular tools. This is the Figure 3 in the manuscript
++ **map_amisul.R:** the script to produce the maps of the populations containing amisulbrom resistant strains in France. This plot was not included in the manuscript
+
 
