@@ -37,7 +37,7 @@ summary(db_commu)
 #loading the resistance data
 ###############################################################################
 
-rez_list<-read.table("data/R_mildiouQI2.txt",header=TRUE,sep="\t")
+rez_list<-read.table("data/R_mildiouQI2.txt",header=TRUE,sep="\t",colClasses="factor")
 Raox_list<-rez_list[!is.na(rez_list$AOX) | 
                       (rez_list$AMISUL==1 & !is.na(rez_list$AMISUL)),]
 Ramet_list<-rez_list[!is.na(rez_list$AMETOC),]
