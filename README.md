@@ -5,9 +5,9 @@
 ![alt text](https://xwozha.db.files.1drv.com/y4mSuQULu970Jf5GnBDqavtyLhJmOPeVlKoA_UQoxH6HL-ywl0eMmxNb7C3_xA9cEiBSke1YD65qrKmw0lqQER1sfw3CdlPEwtYegKz9xDQpTbt5K0SUGSJDxYywFIMK1ZNS2pNNdMvWuL1wRJGXmgXnvZBXFA6sV-gf_wEfAJoe7BMVkBN6sF_j5Bmwur9NUocTggzp9k25bAgKSzvra9srA?width=1584&height=588&cropmode=none)
 
 ## Context
-Complex III inhibitors are fungicides that have been extensively used in french vineyards. Among different pathogens, they are used against *Plasmopara viticola*, which is responsible for grapewine downy mildew. The evolution of fungicide resistance is one of the adverse effect of a regular and repeated use of an active substance against a pest. In the study related to this repository, we investigated the evolution of resistance to ametoctradin and amisulbrom in French populations of *P. viticola*. This repository describe the datasets used in the study and provide the R scripts used to make the statistical analysis and to produce the plot that are found in the manuscript. 
+Complex III inhibitors are fungicides that are extensively used in french vineyards. Among different pathogens, they are targetting *Plasmopara viticola*, which is responsible for grapewine downy mildew. The evolution of fungicide resistance is one of the adverse effect of a regular and repeated use of an active substance against a pest. In the study related to this repository, we investigated the evolution of resistance to ametoctradin and amisulbrom in French populations of *P. viticola*. This repository describe the datasets used in the study and provide the R scripts used to make the statistical analysis and to produce the plot that are found in the manuscript. 
 
-## The data
+## Datasets
 You can find the dataset and the geographical data used to produce the analyses and the figures of this manuscript in the *data* folder. Three files contain geographical data: 
 + commu.RData
 + departe.RData
@@ -35,7 +35,7 @@ The fourth dataset contains the code for the analysis of the frequency of the AO
   + *AMISUL*: Amisulbrom resistance status deducted from a combination of the information of the columns AMISULBROM_SSSHAM and AMISULBROM_SHAM (NA=not tested, 0=sensitive, 1=target site resistant)
   											
 
-## The R scripts
+## R scripts
 + **load_mildew_data.R:** the script to load the different datasets in the environment
 + **AOX_evolution.R:** the script to analyse the evolution of the frequency of the population containing AOX-related resistance strains in France and to produce the Figure 1
 + **map_AOX.R:** this script produce the maps of the populations containing AOX-related resistant strains in France. This is the Figure 2
