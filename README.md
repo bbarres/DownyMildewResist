@@ -20,7 +20,7 @@ You can find the dataset and the geographical data used to produce the analyses 
 
 These geographical data were obtained using the data from the [IGN website](http://professionnels.ign.fr/adminexpress). The version of the data used is the "Edition Novembre 2017". 
 
-The fourth dataset contains the code for the analysis of the frequency of the AOX-related resistance in France: 
+The fourth dataset contains the results of the different bioassays and biomolecular test conducted on the sampled populations in France, as well as some geographical information on these populations: 
 + R_mildiouQI2.txt
   + *sample_ID*: sample identifier
   + *year*: year of sampling
