@@ -4,8 +4,9 @@
 ###############################################################################
 ###############################################################################
 
-#this script is used for the regression analysis of the frequency of the 
-#populations containing AOX-related resistant strains and to produce Figure 1
+#this script is used for the computation of the MIC of the different 
+#populations tested with amisulbrom, in order to justify the DD used in the 
+#manuscript for amisulbrom
 #loading the packages necessary for the analysis
 library(tidyr)
 library(drc)
