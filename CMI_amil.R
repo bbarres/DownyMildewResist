@@ -152,6 +152,12 @@ axis(2,at=log(c(0.2,1,10,100,500,1500)),cex.axis=1.5,
 box(bty="o",lwd=4)
 title(main=NULL,xlab="Index of Population",ylab="MIC (mg/L)",cex.lab=2,
       font.lab=2)
+legend(1,log(1500),
+       legend=c("2013 amisulbrom","2013 amisulbrom with SHAM"),
+       pch=c(19,17),col=c(levels(infsamp$coloV)[2],brewer.pal(7,"Accent")[5]),
+       bg=c(levels(infsamp$coloV)[2],brewer.pal(7,"Accent")[5]),
+       bty="n",cex=2,pt.cex=2,xpd=TRUE,text.font=2,
+       ncol=1,x.intersp=1,y.intersp=0.8)
 par(op)
 
 #export to pdf 7 x 14 inches
