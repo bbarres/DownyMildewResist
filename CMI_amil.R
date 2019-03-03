@@ -106,11 +106,12 @@ axis(2,at=log(c(0.2,1,10,100,500,1500)),cex.axis=1.5,
 box(bty="o",lwd=4)
 title(main=NULL,xlab="Index of Population",ylab="MIC (mg/L)",cex.lab=2,
       font.lab=2)
-legend(8,log(1500),
+legend(8,log(300),
        legend=c("2012","2013","2014","2015"),
        pch=19,col=levels(infsamp$coloV),bg=levels(infsamp$coloV),
        bty="n",cex=2,pt.cex=3,xpd=TRUE,text.font=2,
        ncol=1,x.intersp=2.5,y.intersp=0.8)
+text(4,log(900),"A",cex=5)
 
 plot(log(arrange(infsamp,year,MIC)$MIC),pch=19, cex=1.5,las=1,axes=FALSE,
      ann=FALSE,col=alpha(arrange(infsamp,year,MIC)$coloV,0.5))
@@ -121,11 +122,12 @@ axis(2,at=log(c(0.2,1,10,100,500,1500)),cex.axis=1.5,
 box(bty="o",lwd=4)
 title(main=NULL,xlab="Index of Population",ylab="MIC (mg/L)",cex.lab=2,
       font.lab=2)
-legend(8,log(1500),
+legend(8,log(300),
        legend=c("2012","2013","2014","2015"),
        pch=19,col=levels(infsamp$coloV),bg=levels(infsamp$coloV),
        bty="n",cex=2,pt.cex=3,xpd=TRUE,text.font=2,
        ncol=1,x.intersp=2.5,y.intersp=0.8)
+text(4,log(900),"B",cex=5)
 
 par(mar=c(5.1,6.1,1,1))
 plot(log(arrange(infsamp,year,MIC)$MIC)[arrange(infsamp,year,MIC)$year==2013],
@@ -150,12 +152,13 @@ axis(2,at=log(c(0.2,1,10,100,500,1500)),cex.axis=1.5,
 box(bty="o",lwd=4)
 title(main=NULL,xlab="Index of Population",ylab="MIC (mg/L)",cex.lab=2,
       font.lab=2)
-legend(1,log(1500),
+legend(2.5,log(300),
        legend=c("2013 amisulbrom","2013 amisulbrom with SHAM"),
        pch=c(19,17),col=c(levels(infsamp$coloV)[2],brewer.pal(7,"Accent")[5]),
        bg=c(levels(infsamp$coloV)[2],brewer.pal(7,"Accent")[5]),
        bty="n",cex=2,pt.cex=3,xpd=TRUE,text.font=2,
        ncol=1,x.intersp=2.5,y.intersp=0.8)
+text(1.6,log(900),"C",cex=5)
 par(op)
 
 #export to pdf 7 x 14 inches
