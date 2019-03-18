@@ -23,7 +23,7 @@ These geographical data were obtained using the data from the [IGN website](http
 The fourth dataset contains the results of the different bioassays and biomolecular test conducted on the sampled populations in France, as well as some geographical information on these populations: 
 + R_mildiouQI2.txt
   + *sample_ID*: sample identifier
-  + *year*: year of sampling
+  + *year*: sampling year
   + *INSES_CODE*: administrative code of the commune where the sample was taken from
   + *sampling_date*: sampling date
   + *departement*: departement code to which the sampled commune belong
@@ -33,7 +33,15 @@ The fourth dataset contains the results of the different bioassays and biomolecu
   + *AOX*: AOX-related resistance status deducted from the comparison of the columns AMISULBROM_SSSHAM and AMISULBROM_SHAM (NA=not tested, 0=not AOX-related resistant, 1=AOX-related resistant)
   + *AMETOC*: Ametoctradin resistance status resulting from the discriminant dose bioassay with ametoctradin with SHAM (NA=not tested, 0=sensitive, 1=target site resistant only for the first bioassay, 2=target site resistant for the two bioassays)
   + *AMISUL*: Amisulbrom resistance status deducted from a combination of the information of the columns AMISULBROM_SSSHAM and AMISULBROM_SHAM (NA=not tested, 0=sensitive, 1=target site resistant)
-  											
+
+The fifth dataset contains the results of the dose-response bioassays conducted on populations between 2012 and 2015, with and without the addition of 80 mg/L of SHAM to inhibit the alternative oxydase pathway
++ Amisul_base.txt
+  + *sample_ID*: sample identifier
+  + *region*: sampling region
+  + *raw_MIC*: the value of the "raw" MIC. This is the first value for which no sporulation for the population was observed on leaf discs. These values can be different from the ones obtained using regression. 
+  + *year*: sampling year
+  + *sham*: yes/no - is there addition of 80 mg/l of SHAM for the bioassay
+  + *0	0.01	0.1	1	10	100*: each column give the percentage of sporulation observed at the different concentration of amisulbrom. The 1 mg/l value was used as the discriminant dose for the tested populations. 
 
 ## R scripts
 + **load_mildew_data.R:** the script to load the different datasets in the environment
@@ -41,5 +49,6 @@ The fourth dataset contains the results of the different bioassays and biomolecu
 + **map_AOX.R:** this script produce the maps of the populations containing AOX-related resistant strains in France. This is the Figure 2
 + **map_ameto.R:** the script to produce the maps of populations containing  ametoctradin resistant strains in France using either bioassay or biomolecular tools. This is the Figure 3 in the manuscript
 + **map_amisul.R:** the script to produce the maps of the populations containing amisulbrom resistant strains in France. This plot was not included in the manuscript
++ **MIC_amisul.R** the script used to produce the supplementary material S1 analyses and figures. It mainly consists in the computation of the MIC values of amisulbrom dose-response curves and the analyses of their distribution. 
 
 
