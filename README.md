@@ -8,13 +8,12 @@
 Complex III inhibitors are fungicides that are extensively used in french vineyards. Among different pathogens, they are targetting *Plasmopara viticola*, which is responsible for grapewine downy mildew. The evolution of fungicide resistance is one of the adverse effect of a regular and repeated use of an active substance against a pest. In the study related to this repository, we investigated the evolution of resistance to ametoctradin and amisulbrom in French populations of *P. viticola*. This repository describe the datasets used in the study and provide the R scripts used to make the statistical analysis and to produce the figures that are found in the manuscript. 
 
 ## Datasets
-You can find the dataset and the geographical data used to produce the analyses and the figures of this manuscript in the *data* folder. Three files contain geographical data: 
-+ commu.RData
+You can find the dataset and the geographical data used to produce the analyses and the figures of this manuscript in the *data* folder. Two files contain geographical data: 
 + departe.RData
 + regions.RData
 
 |  departe.RData  |  regions.RData  |
-| --------------- |   --------------- |
+|  -------------  |  -------------  |
 |  ![alt text](https://xqovha.db.files.1drv.com/y4mJeGFQBu2P37nly83ADc3vqKAMHynSiSIw5B9N0Gyuz4Uv5CWWm8dTYGOBRiRRtYrZaqpzVj-m7tjXDr9FoXnSte7Magct34bm_lID3VC3JZMXmumYeheFN15YjlDRQPmrUFX8DklJ4MAx5YCThctP2A-3WC-gHxZLV2uy5LmfFn9ZrUzztvcZt1BF6iaGf54hzV6_Ztlup5D9_6ifNC10Q?width=256&height=254&cropmode=none) | ![alt text](https://xgouha.db.files.1drv.com/y4mYTK7YsDgwIlYw6rz3j08Wd43zp1ZsXssjSbMkGL-3L4YW7ysn8MqmxecalhwJwvNu_jSRveyFkUTiUXs0FBa5SqpCfF7Gb-AP9jEfn4g3oTqBTQ90UXTe6sqXagD8p0V6m6L0RIW5eRrjxA6wQIbSQ_7dWRAtGCQlKkmLbjjFpH4p2Iw82Vfh_0ydNxFtiJhtt9v3KC-_wq7RLTWSlBi-w?width=256&height=253&cropmode=none) |
 
 
