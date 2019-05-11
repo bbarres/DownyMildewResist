@@ -12,13 +12,9 @@ source("load_mildew_data.R")
 #Biological and BM resistant to ametoc maps by departement
 ###############################################################################
 
-#first we merge the resistance table with the commune info
-Ramet_list<-merge(Ramet_list,db_commu,by.x="INSES_CODE",by.y="INSEE_COM")
 #in order to ease the count of different classes of resistance we turn the 
 #variable of interest into a factor
 Ramet_list$AMETOC<-as.factor(Ramet_list$AMETOC)
-#We merge the resistance table with the commune info
-RametBM_list<-merge(RametBM_list,db_commu,by.x="INSES_CODE",by.y="INSEE_COM")
 
 op<-par(mar=c(0,0,1,0),mfrow=c(2,4))
 

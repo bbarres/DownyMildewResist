@@ -16,7 +16,7 @@ library(lme4)
 ###############################################################################
 
 #we load the raw data
-rez_list<-read.table("data/R_mildiouQI2.txt",header=TRUE,sep="\t")
+rez_list<-read.table("data/R_mildiouQI3.txt",header=TRUE,sep="\t")
 #we subset the data to keep only samples with information regarding
 #the AOX resistance
 Raox_list<-rez_list[!is.na(rez_list$AOX) | 
@@ -98,9 +98,6 @@ op<-par(mfrow=c(1,2))
 visreg(AOX.mod2,"year",rug=2,scale="response",jitter=TRUE,by="AOX",
        overlay=TRUE,partial=FALSE,xlab="Year",ylab="P(AOX resistant)",
        legend=FALSE,ylim=c(0,0.7))
-points(table(Raox_listU$AOX,Raox_listU$year)[2,]/
-       colSums(table(Raox_listU$AOX,Raox_listU$year))~
-       as.numeric(names(table(Raox_listU$AOX,Raox_listU$year)[2,])))
 #export in pdf 8 x 6 inches
 visreg(AOX.mod2,"dayEpid",rug=2,scale="response",jitter=TRUE,by="AOX",
        overlay=TRUE,partial=FALSE,xlab="Day of the epidemic season",

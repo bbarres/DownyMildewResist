@@ -12,9 +12,7 @@ source("load_mildew_data.R")
 #AOX map by departement
 ###############################################################################
 
-#first we merge the resistance table with the commune info
-Raox_list<-merge(Raox_list,db_commu,by.x="INSES_CODE",by.y="INSEE_COM")
-#and we reorder the datatable by ID (not really necesarry)
+#First, we reorder the datatable by ID (not really necesarry)
 Raox_list<-Raox_list[order(Raox_list$sample_ID),]
 
 op<-par(mar=c(0,0,1,0),mfrow=c(2,4))

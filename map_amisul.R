@@ -12,10 +12,6 @@ source("load_mildew_data.R")
 #Amisulbrom maps by departements
 ###############################################################################
 
-#first we merge the resistance table with the commune info
-Ramis_list<-merge(Ramis_list,db_commu,by.x="INSES_CODE",by.y="INSEE_COM")
-
-
 op<-par(mar=c(0,0,1,0),mfrow=c(2,3))
 
 #for 2012
