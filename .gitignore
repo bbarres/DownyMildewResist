@@ -3,7 +3,9 @@
 .RData
 .Ruserdata
 
-data
+data/R_mildiouQI.txt
+data/R_mildiouQI2.txt
+data/mildiou_afpp.txt
 output
 
 cartes_afpp.R
