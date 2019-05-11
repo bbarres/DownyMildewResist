@@ -19,7 +19,7 @@ You can find the dataset and the geographical data used to produce the analyses 
 
 These geographical data were obtained using the data from the [IGN website](http://professionnels.ign.fr/adminexpress). The version of the data used is the "Edition Novembre 2017". 
 
-The fourth dataset contains the results of the different bioassays and biomolecular test conducted on the sampled populations in France, as well as some geographical information on these populations: 
+The third dataset contains the results of the different bioassays and biomolecular test conducted on the sampled populations in France, as well as some geographical information on these populations: 
 + R_mildiouQI2.txt
   + *sample_ID*: sample identifier
   + *year*: sampling year
@@ -32,7 +32,7 @@ The fourth dataset contains the results of the different bioassays and biomolecu
   + *AMETOC*: Ametoctradin resistance status resulting from the discriminant dose bioassay with ametoctradin with SHAM (NA=not tested, 0=sensitive, 1=target site resistant only for the first bioassay, 2=target site resistant for the two bioassays)
   + *AMISUL*: Amisulbrom resistance status deducted from a combination of the information of the columns AMISULBROM_SSSHAM and AMISULBROM_SHAM (NA=not tested, 0=sensitive, 1=target site resistant)
 
-The fifth dataset contains the results of the dose-response bioassays conducted on populations between 2012 and 2015, with and without the addition of 80 mg/L of SHAM to inhibit the alternative oxydase pathway
+The fourth dataset contains the results of the dose-response bioassays conducted on populations between 2012 and 2015, with and without the addition of 80 mg/L of SHAM to inhibit the alternative oxydase pathway
 + Amisul_base.txt
   + *sample_ID*: sample identifier
   + *region*: sampling region
