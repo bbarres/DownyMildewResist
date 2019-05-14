@@ -5,7 +5,7 @@
 ![alt text](https://xwozha.db.files.1drv.com/y4mSuQULu970Jf5GnBDqavtyLhJmOPeVlKoA_UQoxH6HL-ywl0eMmxNb7C3_xA9cEiBSke1YD65qrKmw0lqQER1sfw3CdlPEwtYegKz9xDQpTbt5K0SUGSJDxYywFIMK1ZNS2pNNdMvWuL1wRJGXmgXnvZBXFA6sV-gf_wEfAJoe7BMVkBN6sF_j5Bmwur9NUocTggzp9k25bAgKSzvra9srA?width=1584&height=588&cropmode=none)
 
 ## Context
-Complex III inhibitors are fungicides that are extensively used in french vineyards. Among different pathogens, they are targetting *Plasmopara viticola*, which is responsible for grapewine downy mildew. The evolution of fungicide resistance is one of the adverse effect of a regular and repeated use of an active substance against a pest. In the study related to this repository, we investigated the evolution of resistance to ametoctradin and amisulbrom in French populations of *P. viticola*. This repository describe the datasets used in the study and provide the R scripts used to make the statistical analysis and to produce the figures that are found in the manuscript. 
+Complex III inhibitors are fungicides that are extensively used in french vineyards. Among different pathogens, they are targetting *Plasmopara viticola*, which is responsible for grapewine downy mildew. The evolution of fungicide resistance is one of the adverse effect of a regular and repeated use of an active substance against a pest. In the [study](https://onlinelibrary.wiley.com/doi/abs/10.1002/ps.5461) related to this repository, we investigated the evolution of resistance to ametoctradin and amisulbrom in French populations of *P. viticola*. This repository describe the datasets used in the study and provide the R scripts used to make the statistical analysis and to produce the figures that are found in the manuscript. 
 
 ## Datasets
 You can find the dataset and the geographical data used to produce the analyses and the figures of this manuscript in the *data* folder. Two files contain geographical data: 
@@ -48,5 +48,12 @@ The fourth dataset contains the results of the dose-response bioassays conducted
 + **map_ameto.R:** the script to produce the maps of populations containing  ametoctradin resistant strains in France using either bioassay or biomolecular tools. This is the Figure 3 in the manuscript
 + **map_amisul.R:** the script to produce the maps of the populations containing amisulbrom resistant strains in France. This plot was not included in the manuscript
 + **MIC_amisul.R** the script used to produce the supplementary material S1 analyses and figures. It mainly consists in the computation of the MIC values of amisulbrom dose-response curves and the analyses of their distribution. 
+
+## Citation
+You can cite the related study as follow : 
++Fontaine S, Remuson F, Caddoux L, Barrès B. Investigation on the sensitivity of Plasmopara viticola to amisulbrom and ametoctradin in French vineyards using bioassays and molecular tools. Pest Management Science.(https://onlinelibrary.wiley.com/doi/abs/10.1002/ps.5461)
+
+If you want to use (some of) the code found on this page or if you want to cite this repository : 
++Benoit Barrès. bbarres/DownyMildewResist: Supporting data and code for: Investigation on the sensitivity of Plasmopara viticola to amisulbrom and ametoctradin in French vineyards using bioassays and molecular tools. Zenodo; 2019.(https://zenodo.org/badge/latestdoi/113194524)
 
 
