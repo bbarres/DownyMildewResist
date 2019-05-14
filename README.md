@@ -47,7 +47,7 @@ The fourth dataset contains the results of the dose-response bioassays conducted
 + **map_AOX.R:** this script produce the maps of the populations containing AOX-related resistant strains in France. This is the Figure 2
 + **map_ameto.R:** the script to produce the maps of populations containing  ametoctradin resistant strains in France using either bioassay or biomolecular tools. This is the Figure 3 in the manuscript
 + **map_amisul.R:** the script to produce the maps of the populations containing amisulbrom resistant strains in France. This plot was not included in the manuscript
-+ **MIC_amisul.R** the script used to produce the supplementary material S1 analyses and figures. It mainly consists in the computation of the MIC values of amisulbrom dose-response curves and the analyses of their distribution. 
++ **MIC_amisul.R:** the script used to produce the supplementary material S1 analyses and figures. It mainly consists in the computation of the MIC values of amisulbrom dose-response curves and the analyses of their distribution. 
 
 ## Citation
 You can cite the related study as follow : 
