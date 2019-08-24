@@ -50,10 +50,10 @@ The fourth dataset contains the results of the dose-response bioassays conducted
 + **MIC_amisul.R:** the script used to produce the supplementary material S1 analyses and figures. It mainly consists in the computation of the MIC values of amisulbrom dose-response curves and the analyses of their distribution. 
 
 ## Citation
-You can cite the related study as follow : 
+You can cite the related study as follow: 
 + Fontaine S, Remuson F, Caddoux L, Barrès B. Investigation on the sensitivity of *Plasmopara viticola* to amisulbrom and ametoctradin in French vineyards using bioassays and molecular tools. Pest Management Science. [[link]](https://onlinelibrary.wiley.com/doi/abs/10.1002/ps.5461)
 
-If you want to use (some of) the code found on this page or if you want to cite this repository : 
+If you want to use (some of) the code found on this page or if you want to cite this repository: 
 + Benoit Barrès. bbarres/DownyMildewResist: Supporting data and code for: Investigation on the sensitivity of *Plasmopara viticola* to amisulbrom and ametoctradin in French vineyards using bioassays and molecular tools. Zenodo; 2019. [[link]](https://zenodo.org/badge/latestdoi/113194524)
 
 
