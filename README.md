@@ -51,7 +51,7 @@ The fourth dataset contains the results of the dose-response bioassays conducted
 
 ## Citation
 You can cite the related study as follow: 
-+ Fontaine S, Remuson F, Caddoux L, Barrès B. [Investigation on the sensitivity of *Plasmopara viticola* to amisulbrom and ametoctradin in French vineyards using bioassays and molecular tools. *Pest Management Science*.](https://onlinelibrary.wiley.com/doi/abs/10.1002/ps.5461)
++ Fontaine S, Remuson F, Caddoux L, Barrès B. [Investigation on the sensitivity of *Plasmopara viticola* to amisulbrom and ametoctradin in French vineyards using bioassays and molecular tools. *Pest Management Science*, 75:2115-2123, 2019. doi:10.1002/ps.5461.](https://onlinelibrary.wiley.com/doi/abs/10.1002/ps.5461)
 
 If you want to use (some of) the code found on this page or if you want to cite this repository: 
 + Benoit Barrès. bbarres/DownyMildewResist: [Supporting data and code for: Investigation on the sensitivity of *Plasmopara viticola* to amisulbrom and ametoctradin in French vineyards using bioassays and molecular tools. Zenodo; 2019.](https://zenodo.org/badge/latestdoi/113194524)
