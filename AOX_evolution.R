@@ -1,8 +1,8 @@
-###############################################################################
-###############################################################################
+##############################################################################/
+##############################################################################/
 #Evolution of AOX resistance through year and within season
-###############################################################################
-###############################################################################
+##############################################################################/
+##############################################################################/
 
 #this script is used for the regression analysis of the frequency of the 
 #populations containing AOX-related resistant strains and to produce Figure 1
@@ -11,9 +11,9 @@ library(visreg)
 library(lme4)
 
 
-###############################################################################
-#loading and preparing the AOX resistance data
-###############################################################################
+##############################################################################/
+#loading and preparing the AOX resistance data####
+##############################################################################/
 
 #we load the raw data
 rez_list<-read.table("data/R_mildiouQI3.txt",header=TRUE,sep="\t")
@@ -47,9 +47,9 @@ Raox_listU$firstsampY<-
 Raox_listU$dayEpid<-Raox_listU$dayofyear-Raox_listU$firstsampY
 
 
-###############################################################################
-#generalized linear mixed-model
-###############################################################################
+##############################################################################/
+#generalized linear mixed-model####
+##############################################################################/
 
 #we perform a logistic regression in order to test if the day of the epidemic, 
 #and the year have an impact on the proportion of population displaying AOX 
@@ -84,9 +84,9 @@ par(op)
 #export in pdf 12 x 6 inches
 
 
-###############################################################################
-#additionnal code - generalized linear model (no random effect)
-###############################################################################
+##############################################################################/
+#additionnal code - generalized linear model (no random effect)####
+##############################################################################/
 
 #because the magnitude of the random effect explained by the 'departement' 
 #administrative division, a simpler glm work as well
@@ -112,6 +112,6 @@ barplot(table(Raox_listU$AOX,Raox_listU$year),beside=TRUE)
 barplot(table(Raox_listU$AOX,Raox_listU$dayEpid),beside=TRUE)
 
 
-###############################################################################
+##############################################################################/
 #THE END
-###############################################################################
+##############################################################################/
