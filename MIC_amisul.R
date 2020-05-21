@@ -7,32 +7,8 @@
 #this script is used for the computation of the MIC of the different 
 #populations tested with amisulbrom, in order to justify the DD used in the 
 #manuscript for amisulbrom
-#loading the packages necessary for the analysis
-library(tidyr)
-library(dplyr)
-library(drc)
-library(gdata)
-library(RColorBrewer)
-library(scales)
-
-
-##############################################################################/
-#loading and preparing the AOX resistance data####
-##############################################################################/
-
-#we load the raw data
-datamilsub<-read.table("data/Amisul_base.txt",header=TRUE,sep="\t", 
-                       check.names=FALSE)
-datamilsub<-gather(datamilsub,'0','0.01','0.1','1','10','100',
-                   key="dose",value="perc_sp")
-datamilsub$dose<-as.numeric(datamilsub$dose)
-
-#subsetting the data according to the SHAM addition
-datnoSHAM<-datamilsub[datamilsub$sham=="no",]
-datnoSHAM<-drop.levels(datnoSHAM)
-infsamp<-datnoSHAM[datnoSHAM$dose==0,1:4]
-datwiSHAM<-datamilsub[datamilsub$sham=="yes",]
-datwiSHAM<-drop.levels(datwiSHAM)
+#loading the packages and data necessary for the analysis
+source("load_mildew_data.R")
 
 
 ##############################################################################/
